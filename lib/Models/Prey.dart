@@ -19,7 +19,12 @@ class Prey {
   int giveBirth = 0; //iteraciones desde la ultima vez que parió
   int x = 1, y = 1;
   double reproduce = 0;
-  int defending = Random().nextInt(10) + 1;
+  int defending = 1;
+   
+  void defensa(){
+    defending = Random().nextInt(weight) + 1;
+
+  }
 
   Prey({required this.x, required this.y, required this.sex});
 
@@ -29,12 +34,15 @@ class Prey {
     print('noise $noise');
     print('energy $energy');
     print('weight $weight');
+    print('defending $defending');
   }
 
   //Funcion para reproducir las presas e insertarlas a la lista principal de presas en la simulacion
   void reproductionB() {
     if (energy >= 6) {
       listaPresas.insert(0, Prey(x: x, y: y, sex: Random().nextBool()));
+      //Se ajusta su defensa
+      listaPresas[0].defensa();
       nPresasTemp = nPresasTemp + 1;
     }
   }
@@ -67,6 +75,8 @@ class Prey {
         for (var i = 0; i < sons; i++) {
           //Agregamos hijos a la lista de nuevas crias
           newsChilds.add(Prey(x: x, y: y, sex: Random().nextBool()));
+          //Se ajusta su defensa
+          newsChilds.last.defensa();
         }
       }
     }
@@ -103,5 +113,9 @@ void mecanismoPrincipal(int maxX, int maxY) {
 }
 
 void main() {
-  mecanismoPrincipal(20, 30);
+  //mecanismoPrincipal(20, 30);
+  Prey a = Prey(x:1,y:1,sex:true);
+  a.defensa();
+  a.imprime();
+  
 }
