@@ -3,12 +3,17 @@ class Predator {
       {required this.smell,
       required this.view,
       required this.hearing,
-      required this.energy,
-      required this.x,
-      required this.y});
+      required this.health,
+      required this.weight,
+      required this.reproduce,
+      required this.species,
+      required this.sex});
   int smell;
   int view;
   int hearing;
-  int energy;
-  int x, y;
+  double health;
+  double weight;
+  int reproduce;
+  String species;
+  bool sex;
 }
