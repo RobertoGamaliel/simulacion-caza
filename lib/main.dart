@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:prey_predator_simulacion/Models/Environment.dart';
 
 void main() {
   runApp(const MyApp());
@@ -31,6 +32,7 @@ class MyHomePage extends StatefulWidget {
 
 class _MyHomePageState extends State<MyHomePage> {
   int _counter = 0;
+  Environment environment = Environment(tX: 1, tY: 1);
 
   void _incrementCounter() {
     setState(() {
@@ -45,6 +47,10 @@ class _MyHomePageState extends State<MyHomePage> {
 
   @override
   Widget build(BuildContext context) {
+    if (environment.matrix.isEmpty) {
+      environment.generatePlaces();
+      environment.pintPlaces();
+    }
     // This method is rerun every time setState is called, for instance as done
     // by the _incrementCounter method above.
     //
@@ -88,7 +94,10 @@ class _MyHomePageState extends State<MyHomePage> {
         ),
       ),
       floatingActionButton: FloatingActionButton(
-        onPressed: _incrementCounter,
+        onPressed: () {
+          environment.iteratePlaces();
+          environment.pintPlaces();
+        },
         tooltip: 'Increment',
         child: const Icon(Icons.add),
       ), // This trailing comma makes auto-formatting nicer for build methods.

@@ -1,5 +1,6 @@
-import 'package:prey_predator_simulacion/Models/Place.dart';
+import 'package:prey_predator_simulacion/Functions/GenerateToken.dart';
 import 'package:prey_predator_simulacion/Models/Prey.dart';
+import 'dart:math';
 
 class Predator {
   Predator(
@@ -9,29 +10,30 @@ class Predator {
       required this.hearing,
       required this.health,
       required this.weight,
-      required this.reproduce,
+      required this.token,
       required this.species,
       required this.sex});
   Map<String, dynamic> senses;
   double health;
   double weight;
-  int reproduce;
+  double reproduce = 0;
   int smell;
   int view;
   int hearing;
   String species;
-  bool sex;
+  String token;
+  bool sex; // true = hembra, false = macho
 
-  List<Prey> hunt(List<Prey> preys, Map<String, int> placeValues) {
-    List<int> preysAlives = [], //Presas que no son cadazas por el depredador.
-        preysKills = []; // presas asesinadas por el depredador
-    double hunted = 0; // Cantdad (en peso) de presas cazadas
+  List<dynamic> hunt(List<Prey> preys, Map<String, int> placeValues,
+      List<Predator> predators) {
+    List<Prey> preysAlives = []; //Presas que no son cadazas por el depredador.
+    List<int> preysKills = []; // presas asesinadas por el depredador
     for (var i = 0; i < preys.length; i++) {
       var result = {};
       if ((result = attack(placeValues, senses["primary"], preys[i]))["hunt"] ==
           true) {
         health += result["Energy"];
-        if (health >= 0) {
+        if (health <= 0) {
           //El cazador murió y el ciclo no deberia continuar
           i = 12000000000000000;
         } else if (health >= weight) {
@@ -47,7 +49,7 @@ class Predator {
           true) {
         //Si no hubo exito con el sentido principal pero si con el secundario
         health += result["Energy"];
-        if (health >= 0) {
+        if (health <= 0) {
           i = 12000000000000000;
         } else if (health >= weight) {
           preysKills.add(i);
@@ -55,10 +57,66 @@ class Predator {
         } else {
           preysKills.add(i);
         }
+      } else if ((result =
+              attack(placeValues, senses["third"], preys[i]))["hunt"] ==
+          true) {
+        //Si no hubo exito con el sentido principal pero si con el secundario
+        health += result["Energy"];
+        if (health <= 0) {
+          i = 12000000000000000;
+        } else if (health >= weight) {
+          preysKills.add(i);
+          i = 12000000000000000;
+        } else {
+          preysKills.add(i);
+        }
+      } else {
+        //En caso de que ningun tipo de sentido detecta a la presa no hacemos nada?
       }
     }
 
-    return preys;
+    if (sex) {
+      //Si es hembra le sumamos el valor de reporducción
+      reproduce += .8 / weight;
+      //Si la variable de preproduccion se llena y hay un macho en los depredadores realizamos la reproducción
+      if (reproduce >= 3 && predators.any((element) => element.sex = false)) {
+        reproduce -= 3;
+
+        //Sacamos cuantas crias tendra y en un ciclo for las incluimos
+        int sons = (5 / weight).ceil();
+        for (var i = 0; i < sons; i++) {
+          predators.add(Predator(
+              senses: senses,
+              smell: smell,
+              view: view,
+              token: GenerateToken.GenToken(),
+              hearing: hearing,
+              health: health *
+                  .33, //Solo tendrá una tercera parte d ela vida de la madre
+              weight: weight,
+              species: species,
+              sex: Random().nextInt(2) == 0 ? true : false));
+        }
+      }
+    }
+
+    //Revisamos las presas que fueron asesinadas por este cazador y las eliminamos de la lista
+    for (var i = 0; i < preys.length; i++) {
+      //Si el indice no esta incluido en los indices de presas asesinadas las agregamos en las presas vivas
+      if (!preysKills.any((element) => element == i)) {
+        preysAlives.add(preys[i]);
+      }
+    }
+
+    //Por ultimo revisamos si el depredador sigue vivo o muerto pues pudo haber muerto al recibir mas daños
+    //Que energia al cazar
+    if (health <= 0) {
+      //Buscamos su index usando su token y con este eliminamos el cazador de la lista
+      int index = predators.indexWhere((element) => element.token == token);
+      predators.removeAt(index);
+    }
+
+    return [preys, predators];
   }
 
   Map<String, dynamic> attack(
