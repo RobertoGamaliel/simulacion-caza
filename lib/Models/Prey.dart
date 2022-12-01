@@ -12,7 +12,7 @@ class Prey {
   int camouflage = Random().nextInt(10) + 1;
   int noise = Random().nextInt(10) + 1;
   int energy = Random().nextInt(10) + 1;
-  int weight = Random().nextInt(10) + 1;
+  int weight = Random().nextInt(7) + 3;
   bool sex;
   bool normal =
       true; //Verdadero si ha parido crias en las ultimas 3 iteraciones
@@ -20,10 +20,9 @@ class Prey {
   int x = 1, y = 1;
   double reproduce = 0;
   int defending = 1;
-   
-  void defensa(){
-    defending = Random().nextInt(weight) + 1;
 
+  void defensa() {
+    defending = Random().nextInt(weight) - 2;
   }
 
   Prey({required this.x, required this.y, required this.sex});
@@ -54,7 +53,7 @@ class Prey {
 
     List<Prey> newsChilds = [];
     //Aumentamos su capacidad de reproduccion
-    reproduce += 4 / weight;
+    reproduce += 2 / weight;
 
     //Si esta en estado normal o si tiene mas de 2 iteraciones desde la uútima vez que parió
     if (normal || giveBirth > 2) {
@@ -74,9 +73,9 @@ class Prey {
             .ceil(); //Cantidad de presas qu tendrá de acuerdo a su peso
         for (var i = 0; i < sons; i++) {
           //Agregamos hijos a la lista de nuevas crias
-          newsChilds.add(Prey(x: x, y: y, sex: Random().nextBool()));
-          //Se ajusta su defensa
-          newsChilds.last.defensa();
+          final child = Prey(x: x, y: y, sex: Random().nextBool());
+          child.defensa();
+          newsChilds.add(child);
         }
       }
     }
@@ -114,8 +113,7 @@ void mecanismoPrincipal(int maxX, int maxY) {
 
 void main() {
   //mecanismoPrincipal(20, 30);
-  Prey a = Prey(x:1,y:1,sex:true);
+  Prey a = Prey(x: 1, y: 1, sex: true);
   a.defensa();
   a.imprime();
-  
 }

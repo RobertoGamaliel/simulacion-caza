@@ -44,6 +44,9 @@ class Predator {
           //Si lo anterior no se cumple seguimos cazando
           preysKills.add(i);
         }
+        if (sex) {
+          print("Población health: $health, result ${result["Energy"]}");
+        }
       } else if ((result =
               attack(placeValues, senses["secondary"], preys[i]))["hunt"] ==
           true) {
@@ -57,6 +60,9 @@ class Predator {
         } else {
           preysKills.add(i);
         }
+        if (sex) {
+          print("Población health: $health, result ${result["Energy"]}");
+        }
       } else if ((result =
               attack(placeValues, senses["third"], preys[i]))["hunt"] ==
           true) {
@@ -69,6 +75,9 @@ class Predator {
           i = 12000000000000000;
         } else {
           preysKills.add(i);
+        }
+        if (sex) {
+          print("Población health: $health, result ${result["Energy"]}");
         }
       } else {
         //En caso de que ningun tipo de sentido detecta a la presa no hacemos nada?
@@ -91,8 +100,8 @@ class Predator {
               view: view,
               token: GenerateToken.GenToken(),
               hearing: hearing,
-              health: health *
-                  .33, //Solo tendrá una tercera parte d ela vida de la madre
+              health:
+                  health, //Solo tendrá una tercera parte d ela vida de la madre
               weight: weight,
               species: species,
               sex: Random().nextInt(2) == 0 ? true : false));
