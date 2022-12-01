@@ -65,8 +65,8 @@ class Prey {
       giveBirth = 0; //Reseteamos los dias desde que parió
 
       //Si ha alcanzado una capacidad de reproduccion buena, hay al menos un macho en el área
-      if (reproduce >= 2 && hasMalePrey) {
-        reproduce -= 2;
+      if (reproduce >= 3 && hasMalePrey) {
+        reproduce = 0;
         normal = false; //Pasamos a modo agresivo pues tendrá crias
         defending = (defending * 1.5).ceil(); //Aumentamos su agresividad un 50%
         int sons = (8 / weight)

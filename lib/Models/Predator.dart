@@ -86,13 +86,13 @@ class Predator {
 
     if (sex) {
       //Si es hembra le sumamos el valor de reporducción
-      reproduce += .8 / weight;
+      reproduce += 1.5 / weight;
       //Si la variable de preproduccion se llena y hay un macho en los depredadores realizamos la reproducción
-      if (reproduce >= 3 && predators.any((element) => element.sex = false)) {
-        reproduce -= 3;
+      if (reproduce >= 3 && predators.any((element) => element.sex == false)) {
+        reproduce = 0;
 
         //Sacamos cuantas crias tendra y en un ciclo for las incluimos
-        int sons = (5 / weight).ceil();
+        int sons = (3 / weight).ceil();
         for (var i = 0; i < sons; i++) {
           predators.add(Predator(
               senses: senses,
