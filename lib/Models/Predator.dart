@@ -28,6 +28,7 @@ class Predator {
       List<Predator> predators) {
     List<Prey> preysAlives = []; //Presas que no son cadazas por el depredador.
     List<int> preysKills = []; // presas asesinadas por el depredador
+    health--;
     for (var i = 0; i < preys.length; i++) {
       var result = {};
       if ((result = attack(placeValues, senses["primary"], preys[i]))["hunt"] ==
@@ -44,9 +45,6 @@ class Predator {
           //Si lo anterior no se cumple seguimos cazando
           preysKills.add(i);
         }
-        if (sex) {
-          print("Población health: $health, result ${result["Energy"]}");
-        }
       } else if ((result =
               attack(placeValues, senses["secondary"], preys[i]))["hunt"] ==
           true) {
@@ -59,9 +57,6 @@ class Predator {
           i = 12000000000000000;
         } else {
           preysKills.add(i);
-        }
-        if (sex) {
-          print("Población health: $health, result ${result["Energy"]}");
         }
       } else if ((result =
               attack(placeValues, senses["third"], preys[i]))["hunt"] ==
@@ -76,9 +71,6 @@ class Predator {
         } else {
           preysKills.add(i);
         }
-        if (sex) {
-          print("Población health: $health, result ${result["Energy"]}");
-        }
       } else {
         //En caso de que ningun tipo de sentido detecta a la presa no hacemos nada?
       }
@@ -88,10 +80,13 @@ class Predator {
       //Si es hembra le sumamos el valor de reporducción
       reproduce += 1.5 / weight;
       //Si la variable de preproduccion se llena y hay un macho en los depredadores realizamos la reproducción
-      if (reproduce >= 3 && predators.any((element) => element.sex == false)) {
+      if (reproduce >= 3 &&
+          predators.any((element) => element.sex == false) &&
+          !(3 / weight).isNaN) {
         reproduce = 0;
 
         //Sacamos cuantas crias tendra y en un ciclo for las incluimos
+
         int sons = (3 / weight).ceil();
         for (var i = 0; i < sons; i++) {
           predators.add(Predator(
@@ -148,7 +143,7 @@ class Predator {
         energyGet += prey.weight / weight;
       }
     } else {
-      //Caso de la vista
+      //Caso de la vist
       num viewDifference = abs(placeValues["view"] - prey.camouflage);
       if (viewDifference >= view) {
         energyGet += prey.weight / weight;

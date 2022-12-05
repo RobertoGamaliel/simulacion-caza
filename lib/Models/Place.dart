@@ -36,6 +36,10 @@ class Place {
       actualPredators = result[1];
     }
 
+    while (actualPredators.any((element) => element.health <= 0)) {
+      actualPredators.removeWhere((element) => element.health <= 0);
+    }
+
     //Cuando iteramos toda la lista original de depredadores, la igualamos con la modificada
     predators = actualPredators;
   }
@@ -87,18 +91,6 @@ class Place {
     }
     resume.add(male);
     resume.add(female);
-
-    print("Población total depredadores: ${resume[0]}");
-    print("Población depredadores machos: ${resume[1]}");
-    print("Población depredadores hembras: ${resume[2]}");
-    print("Población_________________________");
-    print("Población total presas ${resume[3]}");
-    print("Población presas machos: ${resume[4]}");
-    print("Población presas hembras: ${resume[5]}");
-    print("Población-----------------------------------------------------");
-    print("Población_____________________________________________");
-    print("Población_______________________________");
-    print("Población__________________");
     return resume;
   }
 
@@ -120,7 +112,7 @@ class Place {
           view: view,
           hearing: Random().nextInt(9) + 1,
           health: Random().nextInt(9) + 1,
-          weight: Random().nextInt(9) / 2,
+          weight: (Random().nextInt(9) + 2) / 2,
           token: GenerateToken.GenToken(),
           species: species[Random().nextInt(6)],
           sex: i < totalPredators / 2 ? true : false)); //Random().nextBool()));
@@ -146,5 +138,57 @@ class Place {
     senses["secondary"] = sensesAdd[1];
     senses["third"] = sensesAdd[2];
     return senses;
+  }
+
+  int femalePrey() {
+    int total = 0;
+    for (var prey in preys) {
+      if (prey.sex) total++;
+    }
+    return total;
+  }
+
+  int femlePredtors() {
+    int total = 0;
+    for (var predator in predators) {
+      if (predator.sex) total++;
+    }
+    return total;
+  }
+
+  int preyDanger({required bool maxx}) {
+    int val = 0;
+    for (var prey in preys) {
+      val = maxx ? max(prey.defending, val) : min(prey.defending, val);
+    }
+    return val;
+  }
+
+  double predatorHealth({required bool maxx}) {
+    double live = maxx ? 0 : 10000;
+    for (var pred in predators) {
+      live = maxx ? max(live, pred.health) : min(live, pred.health);
+    }
+    return live;
+  }
+
+  double averagePradorHealth() {
+    double total = 0;
+    int len = 0;
+    for (var pred in predators) {
+      total += pred.health;
+      len++;
+    }
+    return total / len;
+  }
+
+  double averagePreyDanger() {
+    double total = 0;
+    int len = 0;
+    for (var prey in preys) {
+      total += prey.defending;
+      len++;
+    }
+    return total / len;
   }
 }

@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:prey_predator_simulacion/Functions/Dialogs.dart';
 import 'package:prey_predator_simulacion/Models/Environment.dart';
+import 'package:prey_predator_simulacion/UI/PlacceColors.dart';
+import 'package:prey_predator_simulacion/UI/PlaceInfo.dart';
 
 void main() {
   runApp(const MyApp());
@@ -31,76 +34,164 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  int _counter = 0;
-  Environment environment = Environment(tX: 1, tY: 1);
-
-  void _incrementCounter() {
-    setState(() {
-      // This call to setState tells the Flutter framework that something has
-      // changed in this State, which causes it to rerun the build method below
-      // so that the display can reflect the updated values. If we changed
-      // _counter without calling setState(), then the build method would not be
-      // called again, and so nothing would appear to happen.
-      _counter++;
-    });
-  }
+  int _placeType = 0;
+  Environment environment = Environment(tX: 4, tY: 3);
+  late Size s;
+  int maxX = 0, maxY = 0, iteration = 0;
 
   @override
   Widget build(BuildContext context) {
+    s = MediaQuery.of(context).size;
     if (environment.matrix.isEmpty) {
       environment.generatePlaces();
       environment.pintPlaces();
+      maxY = environment.matrix.length;
+      maxX = environment.matrix.first.length;
     }
-    // This method is rerun every time setState is called, for instance as done
-    // by the _incrementCounter method above.
-    //
-    // The Flutter framework has been optimized to make rerunning build methods
-    // fast, so that you can just rebuild anything that needs updating rather
-    // than having to individually change instances of widgets.
     return Scaffold(
       appBar: AppBar(
-        // Here we take the value from the MyHomePage object that was created by
-        // the App.build method, and use it to set our appbar title.
-        title: Text(widget.title),
+        backgroundColor: Colors.black,
+        actions: [
+          Padding(
+            padding: EdgeInsets.only(right: 10),
+            child: Center(
+                child: Text(
+              "Iteration: $iteration",
+              style: const TextStyle(
+                  color: Colors.white,
+                  fontWeight: FontWeight.bold,
+                  fontSize: 14),
+              textAlign: TextAlign.center,
+            )),
+          ),
+          FloatingActionButton(
+              mini: true,
+              heroTag: "reset",
+              backgroundColor: const Color.fromARGB(255, 134, 1, 1),
+              child: const Text(
+                "Reset",
+                style: TextStyle(
+                    color: Colors.white,
+                    fontWeight: FontWeight.bold,
+                    fontSize: 10),
+                textAlign: TextAlign.center,
+              ),
+              onPressed: () async {
+                if (!await Dialogs.boolAnswerDialog(
+                    "Advertencia", "¿Resetear el entorno?", context)) return;
+                environment.matrix = [];
+                iteration = 0;
+                setState(() {});
+              }),
+          FloatingActionButton(
+              mini: true,
+              heroTag: "ChangeVieyPlace",
+              backgroundColor: const Color.fromARGB(255, 0, 145, 24),
+              child: _iconPlaceType(),
+              onPressed: () => setState(() {
+                    if (_placeType == 3) {
+                      _placeType = 0;
+                    } else {
+                      _placeType++;
+                    }
+                  }))
+        ],
       ),
       body: Center(
-        // Center is a layout widget. It takes a single child and positions it
-        // in the middle of the parent.
-        child: Column(
-          // Column is also a layout widget. It takes a list of children and
-          // arranges them vertically. By default, it sizes itself to fit its
-          // children horizontally, and tries to be as tall as its parent.
-          //
-          // Invoke "debug painting" (press "p" in the console, choose the
-          // "Toggle Debug Paint" action from the Flutter Inspector in Android
-          // Studio, or the "Toggle Debug Paint" command in Visual Studio Code)
-          // to see the wireframe for each widget.
-          //
-          // Column has various properties to control how it sizes itself and
-          // how it positions its children. Here we use mainAxisAlignment to
-          // center the children vertically; the main axis here is the vertical
-          // axis because Columns are vertical (the cross axis would be
-          // horizontal).
-          mainAxisAlignment: MainAxisAlignment.center,
+        child: ListView(
+          scrollDirection: Axis.vertical,
           children: <Widget>[
-            const Text(
-              'You have pushed the button this many times:',
-            ),
-            Text(
-              '$_counter',
-              style: Theme.of(context).textTheme.headline4,
+            Column(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              mainAxisSize: MainAxisSize.max,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: List.generate(
+                maxY,
+                (yi) => Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  mainAxisSize: MainAxisSize.max,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: List.generate(
+                      maxX,
+                      (xi) => GestureDetector(
+                            onTap: (() => Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (BuildContext context) =>
+                                        PlaceInfo(
+                                            place: environment.matrix[yi][xi],
+                                            x: xi + 1,
+                                            y: yi + 1)))),
+                            child: PlaceColors.combineContainer(
+                                environment.matrix[yi][xi],
+                                s.width / maxX,
+                                _placeType),
+                          )),
+                ),
+              ),
             ),
           ],
         ),
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
+          if (environment.matrix.any((column) =>
+              column.any((element) => element.preys.length > 2000))) {
+            Dialogs.simpleAlertDialog("Error",
+                "Existen demasiadas presas en uno o más entornos", context);
+            return;
+          }
+          if (environment.matrix.any((column) =>
+              column.any((element) => element.predators.length > 2000))) {
+            Dialogs.simpleAlertDialog(
+                "Error",
+                "Existen demasiados depredadores en uno o más entornos",
+                context);
+            return;
+          }
           environment.iteratePlaces();
-          environment.pintPlaces();
+          iteration++;
+          setState(() {});
         },
         tooltip: 'Increment',
         child: const Icon(Icons.add),
-      ), // This trailing comma makes auto-formatting nicer for build methods.
+      ),
+    );
+  }
+
+  Widget _iconPlaceType() {
+    if (_placeType == 0) {
+      return const Text(
+        "View",
+        style: TextStyle(
+            color: Colors.white, fontWeight: FontWeight.bold, fontSize: 10),
+        textAlign: TextAlign.center,
+      );
+    }
+
+    if (_placeType == 1) {
+      return const Text(
+        "Noise",
+        style: TextStyle(
+            color: Colors.white, fontWeight: FontWeight.bold, fontSize: 10),
+        textAlign: TextAlign.center,
+      );
+    }
+
+    if (_placeType == 2) {
+      return const Text(
+        "Smell",
+        style: TextStyle(
+            color: Colors.white, fontWeight: FontWeight.bold, fontSize: 10),
+        textAlign: TextAlign.center,
+      );
+    }
+
+    return const Text(
+      "All",
+      style: TextStyle(
+          color: Colors.white, fontWeight: FontWeight.bold, fontSize: 10),
+      textAlign: TextAlign.center,
     );
   }
 }
