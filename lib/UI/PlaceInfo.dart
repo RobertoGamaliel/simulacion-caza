@@ -75,7 +75,7 @@ class PlaceInfo extends StatelessWidget {
               textAlign: TextAlign.center,
             ),
             Text(
-              "salud max: ${place.predatorHealth(maxx: true)}  -  Salud min: ${place.predatorHealth(maxx: false)}",
+              "Salud max: ${place.predatorHealth(maxx: true)}  -  Salud min: ${place.predatorHealth(maxx: false)}",
               style: GoogleFonts.poppins(
                   color: Colors.black,
                   fontWeight: FontWeight.w200,

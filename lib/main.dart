@@ -90,7 +90,13 @@ class _MyHomePageState extends State<MyHomePage> {
                       fontSize: 13, fontWeight: FontWeight.w300),
                 ),
                 Text(
-                  "\n5. Ahora solo oprime COMENZAR!",
+                  "\n5. En la parte inferior de la pantalla encontrarás el botón que aumentará las iteraciones.",
+                  textAlign: TextAlign.justify,
+                  style: GoogleFonts.poppins(
+                      fontSize: 13, fontWeight: FontWeight.w300),
+                ),
+                Text(
+                  "\n6. Ahora solo oprime COMENZAR!",
                   textAlign: TextAlign.justify,
                   style: GoogleFonts.poppins(
                       fontSize: 13, fontWeight: FontWeight.w300),
@@ -109,9 +115,9 @@ class _MyHomePageState extends State<MyHomePage> {
                       borderRadius: BorderRadius.circular(50),
                     ),
                     color: Colors.purple[50],
-                    child: const Text(
+                    child: Text(
                       'Comenzar',
-                      style: TextStyle(
+                      style: GoogleFonts.poppins(
                           color: Colors.purple,
                           fontSize: 15,
                           fontWeight: FontWeight.w200),

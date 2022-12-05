@@ -37,7 +37,7 @@ class _Play extends State<Play> {
               style: GoogleFonts.poppins(
                   color: Colors.white,
                   fontWeight: FontWeight.w400,
-                  fontSize: 14),
+                  fontSize: 15),
               textAlign: TextAlign.center,
             )),
           ),
@@ -110,7 +110,9 @@ class _Play extends State<Play> {
           ],
         ),
       ),
+      floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
       floatingActionButton: FloatingActionButton(
+        backgroundColor: Colors.purple[50],
         onPressed: () {
           if (environment.matrix.any((column) =>
               column.any((element) => element.preys.length > 2000))) {
@@ -131,43 +133,43 @@ class _Play extends State<Play> {
           setState(() {});
         },
         tooltip: 'Increment',
-        child: const Icon(Icons.add),
+        child: const Icon(Icons.add, color: Colors.purple),
       ),
     );
   }
 
   Widget _iconPlaceType() {
     if (_placeType == 0) {
-      return const Text(
+      return Text(
         "View",
-        style: TextStyle(
+        style: GoogleFonts.poppins(
             color: Colors.white, fontWeight: FontWeight.w400, fontSize: 10),
         textAlign: TextAlign.center,
       );
     }
 
     if (_placeType == 1) {
-      return const Text(
+      return Text(
         "Noise",
-        style: TextStyle(
+        style: GoogleFonts.poppins(
             color: Colors.white, fontWeight: FontWeight.w400, fontSize: 10),
         textAlign: TextAlign.center,
       );
     }
 
     if (_placeType == 2) {
-      return const Text(
+      return Text(
         "Smell",
-        style: TextStyle(
+        style: GoogleFonts.poppins(
             color: Colors.white, fontWeight: FontWeight.w400, fontSize: 10),
         textAlign: TextAlign.center,
       );
     }
 
-    return const Text(
+    return Text(
       "All",
-      style: TextStyle(
-          color: Colors.white, fontWeight: FontWeight.w400, fontSize: 10),
+      style: GoogleFonts.poppins(
+          color: Colors.white, fontWeight: FontWeight.bold, fontSize: 10),
       textAlign: TextAlign.center,
     );
   }
