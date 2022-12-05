@@ -1,3 +1,5 @@
+// ignore_for_file: deprecated_member_use
+
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:prey_predator_simulacion/UI/Play.dart';
@@ -102,7 +104,7 @@ class _MyHomePageState extends State<MyHomePage> {
                 ),
                 Container(
                   height: s.height * 0.050,
-                  margin: EdgeInsets.fromLTRB(60, 15, 60, 10),
+                  margin: const EdgeInsets.fromLTRB(60, 15, 60, 10),
                   child: FlatButton(
                     onPressed: () {
                       Navigator.push(
