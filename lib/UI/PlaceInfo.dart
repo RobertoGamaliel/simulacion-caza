@@ -17,7 +17,7 @@ class PlaceInfo extends StatelessWidget {
       backgroundColor: Colors.white,
       appBar: AppBar(
         backgroundColor: Colors.black,
-        title: Text('Casilla ($x,$y)'),
+        title: Text('Casilla ($x,$y)', style: GoogleFonts.poppins()),
         centerTitle: true,
       ),
       body: SizedBox(
