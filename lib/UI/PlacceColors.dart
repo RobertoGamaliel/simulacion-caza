@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:prey_predator_simulacion/Models/Place.dart';
 
 class PlaceColors {
@@ -100,37 +101,37 @@ class PlaceColors {
       children: [
         Text(
           "Preys: ${place.preys.length}",
-          style: const TextStyle(
+          style: GoogleFonts.montserrat(
               color: Colors.black, fontWeight: FontWeight.bold, fontSize: 12),
           textAlign: TextAlign.center,
         ),
         Text(
           "female: ${place.femalePrey()}",
-          style: const TextStyle(
+          style: GoogleFonts.poppins(
               color: Colors.black, fontWeight: FontWeight.w400, fontSize: 10),
           textAlign: TextAlign.center,
         ),
         Text(
           "male: ${place.preys.length - place.femalePrey()}",
-          style: const TextStyle(
+          style: GoogleFonts.poppins(
               color: Colors.black, fontWeight: FontWeight.w400, fontSize: 10),
           textAlign: TextAlign.center,
         ),
         Text(
           "\nPredts: ${place.predators.length}",
-          style: const TextStyle(
+          style: GoogleFonts.montserrat(
               color: Colors.black, fontWeight: FontWeight.bold, fontSize: 12),
           textAlign: TextAlign.center,
         ),
         Text(
           "female: ${place.femlePredtors()}",
-          style: const TextStyle(
+          style: GoogleFonts.poppins(
               color: Colors.black, fontWeight: FontWeight.w400, fontSize: 10),
           textAlign: TextAlign.center,
         ),
         Text(
           "male: ${place.predators.length - place.femlePredtors()}",
-          style: const TextStyle(
+          style: GoogleFonts.poppins(
               color: Colors.black, fontWeight: FontWeight.w400, fontSize: 10),
           textAlign: TextAlign.center,
         )

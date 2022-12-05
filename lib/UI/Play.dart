@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:prey_predator_simulacion/Functions/Dialogs.dart';
 import 'package:prey_predator_simulacion/Models/Environment.dart';
 import 'package:prey_predator_simulacion/UI/PlacceColors.dart';
@@ -33,9 +34,9 @@ class _Play extends State<Play> {
             child: Center(
                 child: Text(
               "Iteration: $iteration",
-              style: const TextStyle(
+              style: GoogleFonts.poppins(
                   color: Colors.white,
-                  fontWeight: FontWeight.bold,
+                  fontWeight: FontWeight.w400,
                   fontSize: 14),
               textAlign: TextAlign.center,
             )),
@@ -48,7 +49,7 @@ class _Play extends State<Play> {
                 "Reset",
                 style: TextStyle(
                     color: Colors.white,
-                    fontWeight: FontWeight.bold,
+                    fontWeight: FontWeight.w400,
                     fontSize: 10),
                 textAlign: TextAlign.center,
               ),
@@ -140,7 +141,7 @@ class _Play extends State<Play> {
       return const Text(
         "View",
         style: TextStyle(
-            color: Colors.white, fontWeight: FontWeight.bold, fontSize: 10),
+            color: Colors.white, fontWeight: FontWeight.w400, fontSize: 10),
         textAlign: TextAlign.center,
       );
     }
@@ -149,7 +150,7 @@ class _Play extends State<Play> {
       return const Text(
         "Noise",
         style: TextStyle(
-            color: Colors.white, fontWeight: FontWeight.bold, fontSize: 10),
+            color: Colors.white, fontWeight: FontWeight.w400, fontSize: 10),
         textAlign: TextAlign.center,
       );
     }
@@ -158,7 +159,7 @@ class _Play extends State<Play> {
       return const Text(
         "Smell",
         style: TextStyle(
-            color: Colors.white, fontWeight: FontWeight.bold, fontSize: 10),
+            color: Colors.white, fontWeight: FontWeight.w400, fontSize: 10),
         textAlign: TextAlign.center,
       );
     }
@@ -166,7 +167,7 @@ class _Play extends State<Play> {
     return const Text(
       "All",
       style: TextStyle(
-          color: Colors.white, fontWeight: FontWeight.bold, fontSize: 10),
+          color: Colors.white, fontWeight: FontWeight.w400, fontSize: 10),
       textAlign: TextAlign.center,
     );
   }
