@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:prey_predator_simulacion/Models/Place.dart';
 import 'package:prey_predator_simulacion/UI/PlacceColors.dart';
+import 'package:prey_predator_simulacion/UI/PredatorsDescription.dart';
 import 'package:prey_predator_simulacion/UI/preysDescription.dart';
 
 class PlaceInfo extends StatelessWidget {
@@ -59,6 +60,17 @@ class PlaceInfo extends StatelessWidget {
                   fontSize: 16),
               textAlign: TextAlign.center,
             ),
+            Center(
+                child: ElevatedButton(
+                    style: ElevatedButton.styleFrom(primary: Colors.black),
+                    onPressed: () {
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (BuildContext context) =>
+                                  preysDecription(preys: place.preys)));
+                    },
+                    child: const Text("Detalles de pesas"))),
             Text(
               "\nDepredadores: ${place.predators.length}",
               style: GoogleFonts.montserrat(
@@ -99,9 +111,10 @@ class PlaceInfo extends StatelessWidget {
                           context,
                           MaterialPageRoute(
                               builder: (BuildContext context) =>
-                                  preysDecription(preys: place.preys)));
+                                  PredatorsDecription(
+                                      hunter: place.predators)));
                     },
-                    child: const Text("Detalles de pesas")))
+                    child: const Text("Detalles de depredadores")))
           ],
         ),
       ),

@@ -1,18 +1,18 @@
 import 'package:flutter/material.dart';
-import 'package:prey_predator_simulacion/Models/Prey.dart';
+import 'package:prey_predator_simulacion/Models/Predator.dart';
 
-class preysDecription extends StatelessWidget {
-  preysDecription({Key? key, required this.preys}) : super(key: key);
-  final List<Prey> preys;
+class PredatorsDecription extends StatelessWidget {
+  PredatorsDecription({Key? key, required this.hunter}) : super(key: key);
+  final List<Predator> hunter;
   double widSection = 0;
   @override
   Widget build(BuildContext context) {
     Size s = MediaQuery.of(context).size;
-    widSection = s.width / 10;
+    widSection = s.width / 9;
     return Scaffold(
         appBar: AppBar(
           backgroundColor: Colors.black,
-          title: Text('Presas (${preys.length})'),
+          title: Text('Depredadores (${hunter.length})'),
           centerTitle: true,
           actions: [],
         ),
@@ -35,7 +35,7 @@ class preysDecription extends StatelessWidget {
                     child: const RotatedBox(
                         quarterTurns: 1,
                         child: Text(
-                          " Energía ",
+                          " Salud ",
                           textDirection: TextDirection.rtl,
                           style: TextStyle(
                               color: Colors.black,
@@ -49,24 +49,6 @@ class preysDecription extends StatelessWidget {
                     alignment: Alignment.center,
                     decoration: BoxDecoration(
                         color: Colors.white,
-                        border: Border.all(color: Colors.black, width: 0.5)),
-                    child: const RotatedBox(
-                        quarterTurns: 1,
-                        child: Text(
-                          " Defensa ",
-                          textDirection: TextDirection.rtl,
-                          style: TextStyle(
-                              color: Colors.black,
-                              fontWeight: FontWeight.bold,
-                              fontSize: 16),
-                          textAlign: TextAlign.center,
-                        )),
-                  ),
-                  Container(
-                    width: widSection,
-                    alignment: Alignment.center,
-                    decoration: BoxDecoration(
-                        color: Colors.grey[200],
                         border: Border.all(color: Colors.black, width: 0.5)),
                     child: const RotatedBox(
                         quarterTurns: 1,
@@ -84,12 +66,30 @@ class preysDecription extends StatelessWidget {
                     width: widSection,
                     alignment: Alignment.center,
                     decoration: BoxDecoration(
-                        color: Colors.white,
+                        color: Colors.grey[200],
                         border: Border.all(color: Colors.black, width: 0.5)),
                     child: const RotatedBox(
                         quarterTurns: 1,
                         child: Text(
                           " Reproducción ",
+                          textDirection: TextDirection.rtl,
+                          style: TextStyle(
+                              color: Colors.black,
+                              fontWeight: FontWeight.bold,
+                              fontSize: 16),
+                          textAlign: TextAlign.center,
+                        )),
+                  ),
+                  Container(
+                    width: widSection,
+                    alignment: Alignment.center,
+                    decoration: BoxDecoration(
+                        color: Colors.white,
+                        border: Border.all(color: Colors.black, width: 0.5)),
+                    child: const RotatedBox(
+                        quarterTurns: 1,
+                        child: Text(
+                          " Especie ",
                           textDirection: TextDirection.rtl,
                           style: TextStyle(
                               color: Colors.black,
@@ -125,7 +125,7 @@ class preysDecription extends StatelessWidget {
                     child: const RotatedBox(
                         quarterTurns: 1,
                         child: Text(
-                          " Camuflage ",
+                          " Vista ",
                           textDirection: TextDirection.rtl,
                           style: TextStyle(
                               color: Colors.black,
@@ -143,7 +143,7 @@ class preysDecription extends StatelessWidget {
                     child: const RotatedBox(
                         quarterTurns: 1,
                         child: Text(
-                          " Ruido ",
+                          " Oido ",
                           textDirection: TextDirection.rtl,
                           style: TextStyle(
                               color: Colors.black,
@@ -161,7 +161,7 @@ class preysDecription extends StatelessWidget {
                     child: const RotatedBox(
                         quarterTurns: 1,
                         child: Text(
-                          " Aroma ",
+                          " Olfato ",
                           textDirection: TextDirection.rtl,
                           style: TextStyle(
                               color: Colors.black,
@@ -179,30 +179,12 @@ class preysDecription extends StatelessWidget {
                     child: const RotatedBox(
                         quarterTurns: 1,
                         child: Text(
-                          " Estado ",
+                          " Primario ",
                           textDirection: TextDirection.rtl,
                           style: TextStyle(
                               color: Colors.black,
                               fontWeight: FontWeight.bold,
                               fontSize: 16),
-                          textAlign: TextAlign.center,
-                        )),
-                  ),
-                  Container(
-                    width: widSection,
-                    alignment: Alignment.center,
-                    decoration: BoxDecoration(
-                        color: Colors.grey[200],
-                        border: Border.all(color: Colors.black, width: 0.5)),
-                    child: const RotatedBox(
-                        quarterTurns: 1,
-                        child: Text(
-                          " Iteraciónes desde\núltimo nacimiento ",
-                          textDirection: TextDirection.rtl,
-                          style: TextStyle(
-                              color: Colors.black,
-                              fontWeight: FontWeight.bold,
-                              fontSize: 15),
                           textAlign: TextAlign.center,
                         )),
                   ),
@@ -213,7 +195,7 @@ class preysDecription extends StatelessWidget {
                   mainAxisSize: MainAxisSize.max,
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: List.generate(
-                      preys.length,
+                      hunter.length,
                       (index) => Row(
                             mainAxisAlignment: MainAxisAlignment.center,
                             mainAxisSize: MainAxisSize.max,
@@ -223,25 +205,15 @@ class preysDecription extends StatelessWidget {
                                 width: widSection,
                                 alignment: Alignment.center,
                                 decoration: BoxDecoration(
-                                    color: index % 2 == 0
-                                        ? Colors.white
-                                        : Colors.grey[200],
+                                    color: hunter[index].health < 3
+                                        ? Colors.red
+                                        : hunter[index].health < 6
+                                            ? Colors.yellow
+                                            : Colors.green,
                                     border: Border.all(
                                         color: Colors.black, width: 0.5)),
-                                child: Text("${preys[index].energy}"),
-                              ),
-                              Container(
-                                width: widSection,
-                                alignment: Alignment.center,
-                                decoration: BoxDecoration(
-                                    color: preys[index].defending < 3
-                                        ? Colors.yellow
-                                        : preys[index].defending < 6
-                                            ? Colors.orange
-                                            : Colors.red,
-                                    border: Border.all(
-                                        color: Colors.black, width: 0.5)),
-                                child: Text("${preys[index].defending}"),
+                                child: Text(
+                                    hunter[index].health.toStringAsFixed(3)),
                               ),
                               Container(
                                 width: widSection,
@@ -252,7 +224,7 @@ class preysDecription extends StatelessWidget {
                                         : Colors.grey[200],
                                     border: Border.all(
                                         color: Colors.black, width: 0.5)),
-                                child: Text("${preys[index].weight}"),
+                                child: Text("${hunter[index].weight}"),
                               ),
                               Container(
                                 width: widSection,
@@ -264,20 +236,39 @@ class preysDecription extends StatelessWidget {
                                     border: Border.all(
                                         color: Colors.black, width: 0.5)),
                                 child: Text(
-                                    preys[index].reproduce.toStringAsFixed(2)),
+                                    hunter[index].reproduce.toStringAsFixed(2)),
                               ),
                               Container(
                                 width: widSection,
                                 height: 17,
                                 alignment: Alignment.center,
                                 decoration: BoxDecoration(
-                                    color: preys[index].sex
+                                    color: index % 2 == 0
+                                        ? Colors.white
+                                        : Colors.grey[200],
+                                    border: Border.all(
+                                        color: Colors.black, width: 0.5)),
+                                child: Text(
+                                  hunter[index].species,
+                                  style: const TextStyle(
+                                      color: Colors.black,
+                                      fontWeight: FontWeight.w400,
+                                      fontSize: 8),
+                                  textAlign: TextAlign.center,
+                                ),
+                              ),
+                              Container(
+                                width: widSection,
+                                height: 17,
+                                alignment: Alignment.center,
+                                decoration: BoxDecoration(
+                                    color: hunter[index].sex
                                         ? Colors.pink[50]
                                         : Colors.greenAccent[300],
                                     border: Border.all(
                                         color: Colors.black, width: 0.5)),
                                 child: Text(
-                                  preys[index].sex ? 'Hembra' : 'Macho',
+                                  hunter[index].sex ? 'Hembra' : 'Macho',
                                   style: const TextStyle(
                                       color: Colors.black,
                                       fontWeight: FontWeight.w400,
@@ -294,7 +285,7 @@ class preysDecription extends StatelessWidget {
                                         : Colors.grey[200],
                                     border: Border.all(
                                         color: Colors.black, width: 0.5)),
-                                child: Text("${preys[index].camouflage}"),
+                                child: Text("${hunter[index].view}"),
                               ),
                               Container(
                                 width: widSection,
@@ -305,7 +296,7 @@ class preysDecription extends StatelessWidget {
                                         : Colors.grey[200],
                                     border: Border.all(
                                         color: Colors.black, width: 0.5)),
-                                child: Text("${preys[index].noise}"),
+                                child: Text("${hunter[index].hearing}"),
                               ),
                               Container(
                                 width: widSection,
@@ -316,39 +307,26 @@ class preysDecription extends StatelessWidget {
                                         : Colors.grey[200],
                                     border: Border.all(
                                         color: Colors.black, width: 0.5)),
-                                child: Text("${preys[index].odor}"),
+                                child: Text("${hunter[index].smell}"),
                               ),
                               Container(
                                 width: widSection,
                                 height: 17,
                                 alignment: Alignment.center,
                                 decoration: BoxDecoration(
-                                    color: !preys[index].normal
-                                        ? const Color.fromARGB(
-                                            255, 255, 129, 129)
-                                        : const Color.fromARGB(
-                                            255, 39, 255, 150),
+                                    color: index % 2 == 0
+                                        ? Colors.white
+                                        : Colors.grey[200],
                                     border: Border.all(
                                         color: Colors.black, width: 0.5)),
                                 child: Text(
-                                  preys[index].normal ? 'Normal' : 'Defensa+',
+                                  "${hunter[index].senses["primary"]}",
                                   style: const TextStyle(
                                       color: Colors.black,
                                       fontWeight: FontWeight.w400,
                                       fontSize: 8),
                                   textAlign: TextAlign.center,
                                 ),
-                              ),
-                              Container(
-                                width: widSection,
-                                alignment: Alignment.center,
-                                decoration: BoxDecoration(
-                                    color: index % 2 == 0
-                                        ? Colors.white
-                                        : Colors.grey[200],
-                                    border: Border.all(
-                                        color: Colors.black, width: 0.5)),
-                                child: Text("${preys[index].giveBirth}"),
                               ),
                             ],
                           ))),
