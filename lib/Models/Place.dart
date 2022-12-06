@@ -62,6 +62,7 @@ class Place {
 
     //Ya recorrida la lista de prresas, la modificamos agregando las nuevas crias
     for (var newchild in newChilds) {
+      newchild.defensa();
       preys.add(newchild);
     }
   }
@@ -120,6 +121,7 @@ class Place {
 
     for (var i = 0; i < totalPreys; i++) {
       preys.add(Prey(x: x, y: y, sex: Random().nextBool()));
+      preys[i].defensa();
     }
   }
 
