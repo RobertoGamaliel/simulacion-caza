@@ -215,7 +215,8 @@ class PredatorsDecription extends StatelessWidget {
                                     border: Border.all(
                                         color: Colors.black, width: 0.5)),
                                 child: Text(
-                                    hunter[index].health.toStringAsFixed(3)),
+                                    hunter[index].health.toStringAsFixed(3),
+                                    style: GoogleFonts.poppins()),
                               ),
                               Container(
                                 width: widSection,
@@ -226,7 +227,8 @@ class PredatorsDecription extends StatelessWidget {
                                         : Colors.grey[200],
                                     border: Border.all(
                                         color: Colors.black, width: 0.5)),
-                                child: Text("${hunter[index].weight}"),
+                                child: Text("${hunter[index].weight}",
+                                    style: GoogleFonts.poppins()),
                               ),
                               Container(
                                 width: widSection,
@@ -238,7 +240,8 @@ class PredatorsDecription extends StatelessWidget {
                                     border: Border.all(
                                         color: Colors.black, width: 0.5)),
                                 child: Text(
-                                    hunter[index].reproduce.toStringAsFixed(2)),
+                                    hunter[index].reproduce.toStringAsFixed(2),
+                                    style: GoogleFonts.poppins()),
                               ),
                               Container(
                                 width: widSection,
@@ -252,7 +255,7 @@ class PredatorsDecription extends StatelessWidget {
                                         color: Colors.black, width: 0.5)),
                                 child: Text(
                                   hunter[index].species,
-                                  style: const TextStyle(
+                                  style: GoogleFonts.poppins(
                                       color: Colors.black,
                                       fontWeight: FontWeight.w400,
                                       fontSize: 8),
@@ -271,7 +274,7 @@ class PredatorsDecription extends StatelessWidget {
                                         color: Colors.black, width: 0.5)),
                                 child: Text(
                                   hunter[index].sex ? 'Hembra' : 'Macho',
-                                  style: const TextStyle(
+                                  style: GoogleFonts.poppins(
                                       color: Colors.black,
                                       fontWeight: FontWeight.w400,
                                       fontSize: 8),
@@ -287,7 +290,8 @@ class PredatorsDecription extends StatelessWidget {
                                         : Colors.grey[200],
                                     border: Border.all(
                                         color: Colors.black, width: 0.5)),
-                                child: Text("${hunter[index].view}"),
+                                child: Text("${hunter[index].view}",
+                                    style: GoogleFonts.poppins()),
                               ),
                               Container(
                                 width: widSection,
@@ -298,7 +302,8 @@ class PredatorsDecription extends StatelessWidget {
                                         : Colors.grey[200],
                                     border: Border.all(
                                         color: Colors.black, width: 0.5)),
-                                child: Text("${hunter[index].hearing}"),
+                                child: Text("${hunter[index].hearing}",
+                                    style: GoogleFonts.poppins()),
                               ),
                               Container(
                                 width: widSection,
@@ -309,7 +314,8 @@ class PredatorsDecription extends StatelessWidget {
                                         : Colors.grey[200],
                                     border: Border.all(
                                         color: Colors.black, width: 0.5)),
-                                child: Text("${hunter[index].smell}"),
+                                child: Text("${hunter[index].smell}",
+                                    style: GoogleFonts.poppins()),
                               ),
                               Container(
                                 width: widSection,
@@ -323,7 +329,7 @@ class PredatorsDecription extends StatelessWidget {
                                         color: Colors.black, width: 0.5)),
                                 child: Text(
                                   "${hunter[index].senses["primary"]}",
-                                  style: const TextStyle(
+                                  style: GoogleFonts.poppins(
                                       color: Colors.black,
                                       fontWeight: FontWeight.w400,
                                       fontSize: 8),

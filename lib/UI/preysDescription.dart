@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:prey_predator_simulacion/Models/Prey.dart';
 
 class preysDecription extends StatelessWidget {
@@ -12,7 +13,7 @@ class preysDecription extends StatelessWidget {
     return Scaffold(
         appBar: AppBar(
           backgroundColor: Colors.black,
-          title: Text('Presas (${preys.length})'),
+          title: Text('Presas (${preys.length})', style: GoogleFonts.poppins()),
           centerTitle: true,
           actions: [],
         ),
@@ -32,15 +33,15 @@ class preysDecription extends StatelessWidget {
                     decoration: BoxDecoration(
                         color: Colors.white,
                         border: Border.all(color: Colors.black, width: 0.5)),
-                    child: const RotatedBox(
+                    child: RotatedBox(
                         quarterTurns: 1,
                         child: Text(
                           " Energía ",
                           textDirection: TextDirection.rtl,
-                          style: TextStyle(
+                          style: GoogleFonts.poppins(
                               color: Colors.black,
                               fontWeight: FontWeight.bold,
-                              fontSize: 16),
+                              fontSize: 15),
                           textAlign: TextAlign.center,
                         )),
                   ),
@@ -50,15 +51,15 @@ class preysDecription extends StatelessWidget {
                     decoration: BoxDecoration(
                         color: Colors.white,
                         border: Border.all(color: Colors.black, width: 0.5)),
-                    child: const RotatedBox(
+                    child: RotatedBox(
                         quarterTurns: 1,
                         child: Text(
                           " Defensa ",
                           textDirection: TextDirection.rtl,
-                          style: TextStyle(
+                          style: GoogleFonts.poppins(
                               color: Colors.black,
                               fontWeight: FontWeight.bold,
-                              fontSize: 16),
+                              fontSize: 15),
                           textAlign: TextAlign.center,
                         )),
                   ),
@@ -68,15 +69,15 @@ class preysDecription extends StatelessWidget {
                     decoration: BoxDecoration(
                         color: Colors.grey[200],
                         border: Border.all(color: Colors.black, width: 0.5)),
-                    child: const RotatedBox(
+                    child: RotatedBox(
                         quarterTurns: 1,
                         child: Text(
                           " Peso ",
                           textDirection: TextDirection.rtl,
-                          style: TextStyle(
+                          style: GoogleFonts.poppins(
                               color: Colors.black,
                               fontWeight: FontWeight.bold,
-                              fontSize: 16),
+                              fontSize: 15),
                           textAlign: TextAlign.center,
                         )),
                   ),
@@ -86,15 +87,15 @@ class preysDecription extends StatelessWidget {
                     decoration: BoxDecoration(
                         color: Colors.white,
                         border: Border.all(color: Colors.black, width: 0.5)),
-                    child: const RotatedBox(
+                    child: RotatedBox(
                         quarterTurns: 1,
                         child: Text(
                           " Reproducción ",
                           textDirection: TextDirection.rtl,
-                          style: TextStyle(
+                          style: GoogleFonts.poppins(
                               color: Colors.black,
                               fontWeight: FontWeight.bold,
-                              fontSize: 16),
+                              fontSize: 15),
                           textAlign: TextAlign.center,
                         )),
                   ),
@@ -104,15 +105,15 @@ class preysDecription extends StatelessWidget {
                     decoration: BoxDecoration(
                         color: Colors.greenAccent[300],
                         border: Border.all(color: Colors.black, width: 0.5)),
-                    child: const RotatedBox(
+                    child: RotatedBox(
                         quarterTurns: 1,
                         child: Text(
                           " Sexo ",
                           textDirection: TextDirection.rtl,
-                          style: TextStyle(
+                          style: GoogleFonts.poppins(
                               color: Colors.black,
                               fontWeight: FontWeight.bold,
-                              fontSize: 16),
+                              fontSize: 15),
                           textAlign: TextAlign.center,
                         )),
                   ),
@@ -122,15 +123,15 @@ class preysDecription extends StatelessWidget {
                     decoration: BoxDecoration(
                         color: Colors.white,
                         border: Border.all(color: Colors.black, width: 0.5)),
-                    child: const RotatedBox(
+                    child: RotatedBox(
                         quarterTurns: 1,
                         child: Text(
                           " Camuflage ",
                           textDirection: TextDirection.rtl,
-                          style: TextStyle(
+                          style: GoogleFonts.poppins(
                               color: Colors.black,
                               fontWeight: FontWeight.bold,
-                              fontSize: 16),
+                              fontSize: 15),
                           textAlign: TextAlign.center,
                         )),
                   ),
@@ -140,15 +141,15 @@ class preysDecription extends StatelessWidget {
                     decoration: BoxDecoration(
                         color: Colors.grey[200],
                         border: Border.all(color: Colors.black, width: 0.5)),
-                    child: const RotatedBox(
+                    child: RotatedBox(
                         quarterTurns: 1,
                         child: Text(
                           " Ruido ",
                           textDirection: TextDirection.rtl,
-                          style: TextStyle(
+                          style: GoogleFonts.poppins(
                               color: Colors.black,
                               fontWeight: FontWeight.bold,
-                              fontSize: 16),
+                              fontSize: 15),
                           textAlign: TextAlign.center,
                         )),
                   ),
@@ -158,15 +159,15 @@ class preysDecription extends StatelessWidget {
                     decoration: BoxDecoration(
                         color: Colors.white,
                         border: Border.all(color: Colors.black, width: 0.5)),
-                    child: const RotatedBox(
+                    child: RotatedBox(
                         quarterTurns: 1,
                         child: Text(
                           " Aroma ",
                           textDirection: TextDirection.rtl,
-                          style: TextStyle(
+                          style: GoogleFonts.poppins(
                               color: Colors.black,
                               fontWeight: FontWeight.bold,
-                              fontSize: 16),
+                              fontSize: 15),
                           textAlign: TextAlign.center,
                         )),
                   ),
@@ -176,15 +177,15 @@ class preysDecription extends StatelessWidget {
                     decoration: BoxDecoration(
                         color: Colors.white,
                         border: Border.all(color: Colors.black, width: 0.5)),
-                    child: const RotatedBox(
+                    child: RotatedBox(
                         quarterTurns: 1,
                         child: Text(
                           " Estado ",
                           textDirection: TextDirection.rtl,
-                          style: TextStyle(
+                          style: GoogleFonts.poppins(
                               color: Colors.black,
                               fontWeight: FontWeight.bold,
-                              fontSize: 16),
+                              fontSize: 15),
                           textAlign: TextAlign.center,
                         )),
                   ),
@@ -194,15 +195,15 @@ class preysDecription extends StatelessWidget {
                     decoration: BoxDecoration(
                         color: Colors.grey[200],
                         border: Border.all(color: Colors.black, width: 0.5)),
-                    child: const RotatedBox(
+                    child: RotatedBox(
                         quarterTurns: 1,
                         child: Text(
                           " Iteraciónes desde\núltimo nacimiento ",
                           textDirection: TextDirection.rtl,
-                          style: TextStyle(
+                          style: GoogleFonts.poppins(
                               color: Colors.black,
                               fontWeight: FontWeight.bold,
-                              fontSize: 15),
+                              fontSize: 14),
                           textAlign: TextAlign.center,
                         )),
                   ),
@@ -228,7 +229,8 @@ class preysDecription extends StatelessWidget {
                                         : Colors.grey[200],
                                     border: Border.all(
                                         color: Colors.black, width: 0.5)),
-                                child: Text("${preys[index].energy}"),
+                                child: Text("${preys[index].energy}",
+                                    style: GoogleFonts.poppins()),
                               ),
                               Container(
                                 width: widSection,
@@ -241,7 +243,8 @@ class preysDecription extends StatelessWidget {
                                             : Colors.red,
                                     border: Border.all(
                                         color: Colors.black, width: 0.5)),
-                                child: Text("${preys[index].defending}"),
+                                child: Text("${preys[index].defending}",
+                                    style: GoogleFonts.poppins()),
                               ),
                               Container(
                                 width: widSection,
@@ -252,7 +255,8 @@ class preysDecription extends StatelessWidget {
                                         : Colors.grey[200],
                                     border: Border.all(
                                         color: Colors.black, width: 0.5)),
-                                child: Text("${preys[index].weight}"),
+                                child: Text("${preys[index].weight}",
+                                    style: GoogleFonts.poppins()),
                               ),
                               Container(
                                 width: widSection,
@@ -264,7 +268,8 @@ class preysDecription extends StatelessWidget {
                                     border: Border.all(
                                         color: Colors.black, width: 0.5)),
                                 child: Text(
-                                    preys[index].reproduce.toStringAsFixed(2)),
+                                    preys[index].reproduce.toStringAsFixed(2),
+                                    style: GoogleFonts.poppins()),
                               ),
                               Container(
                                 width: widSection,
@@ -278,7 +283,7 @@ class preysDecription extends StatelessWidget {
                                         color: Colors.black, width: 0.5)),
                                 child: Text(
                                   preys[index].sex ? 'Hembra' : 'Macho',
-                                  style: const TextStyle(
+                                  style: GoogleFonts.poppins(
                                       color: Colors.black,
                                       fontWeight: FontWeight.w400,
                                       fontSize: 8),
@@ -294,7 +299,8 @@ class preysDecription extends StatelessWidget {
                                         : Colors.grey[200],
                                     border: Border.all(
                                         color: Colors.black, width: 0.5)),
-                                child: Text("${preys[index].camouflage}"),
+                                child: Text("${preys[index].camouflage}",
+                                    style: GoogleFonts.poppins()),
                               ),
                               Container(
                                 width: widSection,
@@ -305,7 +311,8 @@ class preysDecription extends StatelessWidget {
                                         : Colors.grey[200],
                                     border: Border.all(
                                         color: Colors.black, width: 0.5)),
-                                child: Text("${preys[index].noise}"),
+                                child: Text("${preys[index].noise}",
+                                    style: GoogleFonts.poppins()),
                               ),
                               Container(
                                 width: widSection,
@@ -316,7 +323,8 @@ class preysDecription extends StatelessWidget {
                                         : Colors.grey[200],
                                     border: Border.all(
                                         color: Colors.black, width: 0.5)),
-                                child: Text("${preys[index].odor}"),
+                                child: Text("${preys[index].odor}",
+                                    style: GoogleFonts.poppins()),
                               ),
                               Container(
                                 width: widSection,
@@ -332,7 +340,7 @@ class preysDecription extends StatelessWidget {
                                         color: Colors.black, width: 0.5)),
                                 child: Text(
                                   preys[index].normal ? 'Normal' : 'Defensa+',
-                                  style: const TextStyle(
+                                  style: GoogleFonts.poppins(
                                       color: Colors.black,
                                       fontWeight: FontWeight.w400,
                                       fontSize: 8),
@@ -348,7 +356,8 @@ class preysDecription extends StatelessWidget {
                                         : Colors.grey[200],
                                     border: Border.all(
                                         color: Colors.black, width: 0.5)),
-                                child: Text("${preys[index].giveBirth}"),
+                                child: Text("${preys[index].giveBirth}",
+                                    style: GoogleFonts.poppins()),
                               ),
                             ],
                           ))),
