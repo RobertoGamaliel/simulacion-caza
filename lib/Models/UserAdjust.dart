@@ -43,7 +43,7 @@ class HunterAdjust {
       maxHearing = 10,
       maxChild = 3;
 }
-
+/*
 class PlaceAdjust {
   PlaceAdjust();
   int minView = 1,
@@ -58,10 +58,5 @@ class PlaceAdjust {
       maxHunters = 40;
 }
 
-/*
-int odor;
-  int view;
-  int noise;
-  List<Prey> preys = [];
-  List<Predator> predators = [];
+
    */
