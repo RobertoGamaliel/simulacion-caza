@@ -41,14 +41,15 @@ class _MyHomePageState extends State<MyHomePage> {
     return Scaffold(
       body: Center(
         child: Container(
-          width: s.width * 0.8,
-          height: s.height * 0.72,
+          width: s.width * .98,
+          height: s.height * .85,
           decoration: BoxDecoration(
               border: Border.all(width: 5.0),
               borderRadius: BorderRadius.circular(20.0)),
           child: Padding(
             // padding: const EdgeInsets.all(16.0),
-            padding: const EdgeInsets.fromLTRB(16, 2, 16, 16),
+            padding: EdgeInsets.fromLTRB(
+                s.width * .05, s.height * .015, s.width * .05, s.height * .015),
             child: ListView(
               children: [
                 Text(

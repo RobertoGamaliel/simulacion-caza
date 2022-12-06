@@ -110,7 +110,7 @@ class Place {
       predators.add(Predator(
           senses: makeSenses(),
           smell: Random().nextInt(9) + 1,
-          view: view,
+          view: Random().nextInt(9) + 1,
           hearing: Random().nextInt(9) + 1,
           health: Random().nextInt(9) + 1,
           weight: (Random().nextInt(9) + 2) / 2,

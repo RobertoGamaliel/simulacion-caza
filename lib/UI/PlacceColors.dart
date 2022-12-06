@@ -102,37 +102,37 @@ class PlaceColors {
         Text(
           "Presas: ${place.preys.length}",
           style: GoogleFonts.montserrat(
-              color: Colors.black, fontWeight: FontWeight.bold, fontSize: 12),
+              color: Colors.black, fontWeight: FontWeight.bold, fontSize: 11),
           textAlign: TextAlign.center,
         ),
         Text(
           "Hembras: ${place.femalePrey()}",
           style: GoogleFonts.poppins(
-              color: Colors.black, fontWeight: FontWeight.w400, fontSize: 10),
+              color: Colors.black, fontWeight: FontWeight.w400, fontSize: 9),
           textAlign: TextAlign.center,
         ),
         Text(
           "Machos: ${place.preys.length - place.femalePrey()}",
           style: GoogleFonts.poppins(
-              color: Colors.black, fontWeight: FontWeight.w400, fontSize: 10),
+              color: Colors.black, fontWeight: FontWeight.w400, fontSize: 9),
           textAlign: TextAlign.center,
         ),
         Text(
-          "\nDepredadores: ${place.predators.length}",
+          "Depredadores: ${place.predators.length}",
           style: GoogleFonts.montserrat(
-              color: Colors.black, fontWeight: FontWeight.bold, fontSize: 12),
+              color: Colors.black, fontWeight: FontWeight.bold, fontSize: 11),
           textAlign: TextAlign.center,
         ),
         Text(
           "Hembras: ${place.femlePredtors()}",
           style: GoogleFonts.poppins(
-              color: Colors.black, fontWeight: FontWeight.w400, fontSize: 10),
+              color: Colors.black, fontWeight: FontWeight.w400, fontSize: 9),
           textAlign: TextAlign.center,
         ),
         Text(
           "Machos: ${place.predators.length - place.femlePredtors()}",
           style: GoogleFonts.poppins(
-              color: Colors.black, fontWeight: FontWeight.w400, fontSize: 10),
+              color: Colors.black, fontWeight: FontWeight.w400, fontSize: 9),
           textAlign: TextAlign.center,
         )
       ],
