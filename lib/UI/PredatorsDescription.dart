@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:prey_predator_simulacion/Models/Predator.dart';
 
 class PredatorsDecription extends StatelessWidget {
@@ -12,7 +13,8 @@ class PredatorsDecription extends StatelessWidget {
     return Scaffold(
         appBar: AppBar(
           backgroundColor: Colors.black,
-          title: Text('Depredadores (${hunter.length})'),
+          title: Text('Depredadores (${hunter.length})',
+              style: GoogleFonts.poppins()),
           centerTitle: true,
           actions: [],
         ),
@@ -32,15 +34,15 @@ class PredatorsDecription extends StatelessWidget {
                     decoration: BoxDecoration(
                         color: Colors.white,
                         border: Border.all(color: Colors.black, width: 0.5)),
-                    child: const RotatedBox(
+                    child: RotatedBox(
                         quarterTurns: 1,
                         child: Text(
                           " Salud ",
                           textDirection: TextDirection.rtl,
-                          style: TextStyle(
+                          style: GoogleFonts.poppins(
                               color: Colors.black,
                               fontWeight: FontWeight.bold,
-                              fontSize: 16),
+                              fontSize: 15),
                           textAlign: TextAlign.center,
                         )),
                   ),
@@ -50,15 +52,15 @@ class PredatorsDecription extends StatelessWidget {
                     decoration: BoxDecoration(
                         color: Colors.white,
                         border: Border.all(color: Colors.black, width: 0.5)),
-                    child: const RotatedBox(
+                    child: RotatedBox(
                         quarterTurns: 1,
                         child: Text(
                           " Peso ",
                           textDirection: TextDirection.rtl,
-                          style: TextStyle(
+                          style: GoogleFonts.poppins(
                               color: Colors.black,
                               fontWeight: FontWeight.bold,
-                              fontSize: 16),
+                              fontSize: 15),
                           textAlign: TextAlign.center,
                         )),
                   ),
@@ -68,15 +70,15 @@ class PredatorsDecription extends StatelessWidget {
                     decoration: BoxDecoration(
                         color: Colors.grey[200],
                         border: Border.all(color: Colors.black, width: 0.5)),
-                    child: const RotatedBox(
+                    child: RotatedBox(
                         quarterTurns: 1,
                         child: Text(
                           " Reproducción ",
                           textDirection: TextDirection.rtl,
-                          style: TextStyle(
+                          style: GoogleFonts.poppins(
                               color: Colors.black,
                               fontWeight: FontWeight.bold,
-                              fontSize: 16),
+                              fontSize: 15),
                           textAlign: TextAlign.center,
                         )),
                   ),
@@ -86,15 +88,15 @@ class PredatorsDecription extends StatelessWidget {
                     decoration: BoxDecoration(
                         color: Colors.white,
                         border: Border.all(color: Colors.black, width: 0.5)),
-                    child: const RotatedBox(
+                    child: RotatedBox(
                         quarterTurns: 1,
                         child: Text(
                           " Especie ",
                           textDirection: TextDirection.rtl,
-                          style: TextStyle(
+                          style: GoogleFonts.poppins(
                               color: Colors.black,
                               fontWeight: FontWeight.bold,
-                              fontSize: 16),
+                              fontSize: 15),
                           textAlign: TextAlign.center,
                         )),
                   ),
@@ -104,15 +106,15 @@ class PredatorsDecription extends StatelessWidget {
                     decoration: BoxDecoration(
                         color: Colors.greenAccent[300],
                         border: Border.all(color: Colors.black, width: 0.5)),
-                    child: const RotatedBox(
+                    child: RotatedBox(
                         quarterTurns: 1,
                         child: Text(
                           " Sexo ",
                           textDirection: TextDirection.rtl,
-                          style: TextStyle(
+                          style: GoogleFonts.poppins(
                               color: Colors.black,
                               fontWeight: FontWeight.bold,
-                              fontSize: 16),
+                              fontSize: 15),
                           textAlign: TextAlign.center,
                         )),
                   ),
@@ -122,15 +124,15 @@ class PredatorsDecription extends StatelessWidget {
                     decoration: BoxDecoration(
                         color: Colors.white,
                         border: Border.all(color: Colors.black, width: 0.5)),
-                    child: const RotatedBox(
+                    child: RotatedBox(
                         quarterTurns: 1,
                         child: Text(
                           " Vista ",
                           textDirection: TextDirection.rtl,
-                          style: TextStyle(
+                          style: GoogleFonts.poppins(
                               color: Colors.black,
                               fontWeight: FontWeight.bold,
-                              fontSize: 16),
+                              fontSize: 15),
                           textAlign: TextAlign.center,
                         )),
                   ),
@@ -140,15 +142,15 @@ class PredatorsDecription extends StatelessWidget {
                     decoration: BoxDecoration(
                         color: Colors.grey[200],
                         border: Border.all(color: Colors.black, width: 0.5)),
-                    child: const RotatedBox(
+                    child: RotatedBox(
                         quarterTurns: 1,
                         child: Text(
                           " Oido ",
                           textDirection: TextDirection.rtl,
-                          style: TextStyle(
+                          style: GoogleFonts.poppins(
                               color: Colors.black,
                               fontWeight: FontWeight.bold,
-                              fontSize: 16),
+                              fontSize: 15),
                           textAlign: TextAlign.center,
                         )),
                   ),
@@ -158,15 +160,15 @@ class PredatorsDecription extends StatelessWidget {
                     decoration: BoxDecoration(
                         color: Colors.white,
                         border: Border.all(color: Colors.black, width: 0.5)),
-                    child: const RotatedBox(
+                    child: RotatedBox(
                         quarterTurns: 1,
                         child: Text(
                           " Olfato ",
                           textDirection: TextDirection.rtl,
-                          style: TextStyle(
+                          style: GoogleFonts.poppins(
                               color: Colors.black,
                               fontWeight: FontWeight.bold,
-                              fontSize: 16),
+                              fontSize: 15),
                           textAlign: TextAlign.center,
                         )),
                   ),
@@ -176,12 +178,12 @@ class PredatorsDecription extends StatelessWidget {
                     decoration: BoxDecoration(
                         color: Colors.white,
                         border: Border.all(color: Colors.black, width: 0.5)),
-                    child: const RotatedBox(
+                    child: RotatedBox(
                         quarterTurns: 1,
                         child: Text(
                           " Primario ",
                           textDirection: TextDirection.rtl,
-                          style: TextStyle(
+                          style: GoogleFonts.poppins(
                               color: Colors.black,
                               fontWeight: FontWeight.bold,
                               fontSize: 16),
