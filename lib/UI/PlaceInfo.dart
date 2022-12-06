@@ -1,6 +1,7 @@
 import 'dart:math';
 
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:prey_predator_simulacion/Models/Place.dart';
 import 'package:prey_predator_simulacion/UI/PlacceColors.dart';
 import 'package:prey_predator_simulacion/UI/preysDescription.dart';
@@ -17,7 +18,7 @@ class PlaceInfo extends StatelessWidget {
       backgroundColor: Colors.white,
       appBar: AppBar(
         backgroundColor: Colors.black,
-        title: Text('Casilla ($x,$y)'),
+        title: Text('Casilla ($x,$y)', style: GoogleFonts.poppins()),
         centerTitle: true,
       ),
       body: SizedBox(
@@ -28,7 +29,7 @@ class PlaceInfo extends StatelessWidget {
             colorsResume(s.width / 5),
             Text(
               "\nPresas: ${place.preys.length}",
-              style: const TextStyle(
+              style: GoogleFonts.montserrat(
                   color: Colors.black,
                   fontWeight: FontWeight.w500,
                   fontSize: 16),
@@ -36,31 +37,31 @@ class PlaceInfo extends StatelessWidget {
             ),
             Text(
               "Hembras: ${place.femalePrey()}  -  Machos: ${place.preys.length - place.femalePrey()}",
-              style: const TextStyle(
+              style: GoogleFonts.poppins(
                   color: Colors.black,
-                  fontWeight: FontWeight.w300,
+                  fontWeight: FontWeight.w200,
                   fontSize: 16),
               textAlign: TextAlign.center,
             ),
             Text(
               "Daño maximo: ${place.preyDanger(maxx: true)}  -  Daño minimo: ${place.preyDanger(maxx: false)}",
-              style: const TextStyle(
+              style: GoogleFonts.poppins(
                   color: Colors.black,
-                  fontWeight: FontWeight.w300,
+                  fontWeight: FontWeight.w200,
                   fontSize: 16),
               textAlign: TextAlign.center,
             ),
             Text(
               "Promedio de daño: ${place.averagePreyDanger().toStringAsFixed(4)}",
-              style: const TextStyle(
+              style: GoogleFonts.poppins(
                   color: Colors.black,
-                  fontWeight: FontWeight.w300,
+                  fontWeight: FontWeight.w200,
                   fontSize: 16),
               textAlign: TextAlign.center,
             ),
             Text(
               "\nDepredadores: ${place.predators.length}",
-              style: const TextStyle(
+              style: GoogleFonts.montserrat(
                   color: Colors.black,
                   fontWeight: FontWeight.w500,
                   fontSize: 16),
@@ -68,25 +69,25 @@ class PlaceInfo extends StatelessWidget {
             ),
             Text(
               "Hembras: ${place.femlePredtors()}  -  Machos: ${place.predators.length - place.femlePredtors()}",
-              style: const TextStyle(
+              style: GoogleFonts.poppins(
                   color: Colors.black,
-                  fontWeight: FontWeight.w300,
+                  fontWeight: FontWeight.w200,
                   fontSize: 16),
               textAlign: TextAlign.center,
             ),
             Text(
-              "salud max: ${place.predatorHealth(maxx: true)}  -  Salud min: ${place.predatorHealth(maxx: false)}",
-              style: const TextStyle(
+              "Salud max: ${place.predatorHealth(maxx: true)}  -  Salud min: ${place.predatorHealth(maxx: false)}",
+              style: GoogleFonts.poppins(
                   color: Colors.black,
-                  fontWeight: FontWeight.w300,
+                  fontWeight: FontWeight.w200,
                   fontSize: 16),
               textAlign: TextAlign.center,
             ),
             Text(
-              "Promedio de salud: ${place.averagePradorHealth().toStringAsFixed(4)}",
-              style: const TextStyle(
+              "Promedio de salud: ${place.averagePradorHealth().toStringAsFixed(4)}\n",
+              style: GoogleFonts.poppins(
                   color: Colors.black,
-                  fontWeight: FontWeight.w300,
+                  fontWeight: FontWeight.w200,
                   fontSize: 16),
               textAlign: TextAlign.center,
             ),
@@ -261,8 +262,8 @@ class PlaceInfo extends StatelessWidget {
           alignment: Alignment.center,
           child: Text(
             "Vista:\n${place.view}",
-            style: const TextStyle(
-                color: Colors.black, fontWeight: FontWeight.bold, fontSize: 12),
+            style: GoogleFonts.poppins(
+                color: Colors.black, fontWeight: FontWeight.w500, fontSize: 12),
             textAlign: TextAlign.center,
           ),
         ),
@@ -272,9 +273,9 @@ class PlaceInfo extends StatelessWidget {
           color: PlaceColors.smellColor(place.odor),
           alignment: Alignment.center,
           child: Text(
-            "aroma:\n${place.odor}",
-            style: const TextStyle(
-                color: Colors.black, fontWeight: FontWeight.bold, fontSize: 12),
+            "Aroma:\n${place.odor}",
+            style: GoogleFonts.poppins(
+                color: Colors.black, fontWeight: FontWeight.w500, fontSize: 12),
             textAlign: TextAlign.center,
           ),
         ),
@@ -284,9 +285,9 @@ class PlaceInfo extends StatelessWidget {
           color: PlaceColors.noiseColor(place.noise),
           alignment: Alignment.center,
           child: Text(
-            "sonido:\n${place.noise}",
-            style: const TextStyle(
-                color: Colors.black, fontWeight: FontWeight.bold, fontSize: 12),
+            "Sonido:\n${place.noise}",
+            style: GoogleFonts.poppins(
+                color: Colors.black, fontWeight: FontWeight.w500, fontSize: 12),
             textAlign: TextAlign.center,
           ),
         ),
@@ -315,10 +316,10 @@ class PlaceInfo extends StatelessWidget {
           decoration: BoxDecoration(
               color: PlaceColors.smellColor(place.odor).withOpacity(1 / 3),
               border: Border.all(color: Colors.black54, width: 0.5)),
-          child: const Text(
+          child: Text(
             "Combinado",
-            style: TextStyle(
-                color: Colors.black, fontWeight: FontWeight.bold, fontSize: 12),
+            style: GoogleFonts.poppins(
+                color: Colors.black, fontWeight: FontWeight.w500, fontSize: 11),
             textAlign: TextAlign.center,
           ),
         )

@@ -1,8 +1,8 @@
+// ignore_for_file: deprecated_member_use
+
 import 'package:flutter/material.dart';
-import 'package:prey_predator_simulacion/Functions/Dialogs.dart';
-import 'package:prey_predator_simulacion/Models/Environment.dart';
-import 'package:prey_predator_simulacion/UI/PlacceColors.dart';
-import 'package:prey_predator_simulacion/UI/PlaceInfo.dart';
+import 'package:google_fonts/google_fonts.dart';
+import 'package:prey_predator_simulacion/UI/Play.dart';
 
 void main() {
   runApp(const MyApp());
@@ -15,6 +15,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      debugShowCheckedModeBanner: false,
       title: 'Presa - depredador',
       theme: ThemeData(
         primarySwatch: Colors.blue,
@@ -34,164 +35,101 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  int _placeType = 0;
-  Environment environment = Environment(tX: 4, tY: 3);
-  late Size s;
-  int maxX = 0, maxY = 0, iteration = 0;
-
   @override
   Widget build(BuildContext context) {
-    s = MediaQuery.of(context).size;
-    if (environment.matrix.isEmpty) {
-      environment.generatePlaces();
-      environment.pintPlaces();
-      maxY = environment.matrix.length;
-      maxX = environment.matrix.first.length;
-    }
+    Size s = MediaQuery.of(context).size;
     return Scaffold(
-      appBar: AppBar(
-        backgroundColor: Colors.black,
-        actions: [
-          Padding(
-            padding: EdgeInsets.only(right: 10),
-            child: Center(
-                child: Text(
-              "Iteration: $iteration",
-              style: const TextStyle(
-                  color: Colors.white,
-                  fontWeight: FontWeight.bold,
-                  fontSize: 14),
-              textAlign: TextAlign.center,
-            )),
-          ),
-          FloatingActionButton(
-              mini: true,
-              heroTag: "reset",
-              backgroundColor: const Color.fromARGB(255, 134, 1, 1),
-              child: const Text(
-                "Reset",
-                style: TextStyle(
-                    color: Colors.white,
-                    fontWeight: FontWeight.bold,
-                    fontSize: 10),
-                textAlign: TextAlign.center,
-              ),
-              onPressed: () async {
-                if (!await Dialogs.boolAnswerDialog(
-                    "Advertencia", "¿Resetear el entorno?", context)) return;
-                environment.matrix = [];
-                iteration = 0;
-                setState(() {});
-              }),
-          FloatingActionButton(
-              mini: true,
-              heroTag: "ChangeVieyPlace",
-              backgroundColor: const Color.fromARGB(255, 0, 145, 24),
-              child: _iconPlaceType(),
-              onPressed: () => setState(() {
-                    if (_placeType == 3) {
-                      _placeType = 0;
-                    } else {
-                      _placeType++;
-                    }
-                  }))
-        ],
-      ),
       body: Center(
-        child: ListView(
-          scrollDirection: Axis.vertical,
-          children: <Widget>[
-            Column(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              mainAxisSize: MainAxisSize.max,
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: List.generate(
-                maxY,
-                (yi) => Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  mainAxisSize: MainAxisSize.max,
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: List.generate(
-                      maxX,
-                      (xi) => GestureDetector(
-                            onTap: (() => Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (BuildContext context) =>
-                                        PlaceInfo(
-                                            place: environment.matrix[yi][xi],
-                                            x: xi + 1,
-                                            y: yi + 1)))),
-                            child: PlaceColors.combineContainer(
-                                environment.matrix[yi][xi],
-                                s.width / maxX,
-                                _placeType),
-                          )),
+        child: Container(
+          width: s.width * 0.8,
+          height: s.height * 0.72,
+          decoration: BoxDecoration(
+              border: Border.all(width: 5.0),
+              borderRadius: BorderRadius.circular(20.0)),
+          child: Padding(
+            // padding: const EdgeInsets.all(16.0),
+            padding: const EdgeInsets.fromLTRB(16, 2, 16, 16),
+            child: ListView(
+              children: [
+                Text(
+                  "Bienvenido a \n SUPERVIVENCIA DE ESPECIES",
+                  textAlign: TextAlign.center,
+                  style: GoogleFonts.montserrat(
+                      fontSize: 15, fontWeight: FontWeight.w600),
                 ),
-              ),
+                const Padding(
+                  padding: EdgeInsets.all(15.0),
+                ),
+                Text(
+                  "INSTRUCCIONES",
+                  textAlign: TextAlign.center,
+                  style: GoogleFonts.poppins(
+                      fontSize: 16, fontWeight: FontWeight.w300),
+                ),
+                Text(
+                  "1. La pantalla de inicio cuenta con una barra superior, 12 casillas y 1 botón para el aumentó de iteraciones.",
+                  textAlign: TextAlign.justify,
+                  style: GoogleFonts.poppins(
+                      fontSize: 13, fontWeight: FontWeight.w300),
+                ),
+                Text(
+                  "\n2. En la barra superior encontrarás:\n-Un indicador de iteraciones.\n-Un botón rojo para reiniciar el entorno.\n-Un botón verde que te llevará a los indicadores de los sentidos por casilla del entorno o la opción de ver todos.",
+                  textAlign: TextAlign.justify,
+                  style: GoogleFonts.poppins(
+                      fontSize: 13, fontWeight: FontWeight.w300),
+                ),
+                Text(
+                  "\n3. Cada que oprimas una casilla te llevará a otra pantalla donde conocerás los valores del entorno, número de presas y depredadores junto con las caracteristicas de cada uno.",
+                  textAlign: TextAlign.justify,
+                  style: GoogleFonts.poppins(
+                      fontSize: 13, fontWeight: FontWeight.w300),
+                ),
+                Text(
+                  "\n4. Al iniciar las casillas estrán de color azul la cual significa que estan en el sentido de la vista, para cambiarlo solo oprime el boton verde, como anteriormente se mencionó.",
+                  textAlign: TextAlign.justify,
+                  style: GoogleFonts.poppins(
+                      fontSize: 13, fontWeight: FontWeight.w300),
+                ),
+                Text(
+                  "\n5. En la parte inferior de la pantalla encontrarás el botón que aumentará las iteraciones.",
+                  textAlign: TextAlign.justify,
+                  style: GoogleFonts.poppins(
+                      fontSize: 13, fontWeight: FontWeight.w300),
+                ),
+                Text(
+                  "\n6. Ahora solo oprime COMENZAR!",
+                  textAlign: TextAlign.justify,
+                  style: GoogleFonts.poppins(
+                      fontSize: 13, fontWeight: FontWeight.w300),
+                ),
+                Container(
+                  height: s.height * 0.050,
+                  margin: const EdgeInsets.fromLTRB(60, 15, 60, 10),
+                  child: FlatButton(
+                    onPressed: () {
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (BuildContext context) => Play()));
+                    },
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(50),
+                    ),
+                    color: Colors.purple[50],
+                    child: Text(
+                      'Comenzar',
+                      style: GoogleFonts.poppins(
+                          color: Colors.purple,
+                          fontSize: 15,
+                          fontWeight: FontWeight.w200),
+                    ),
+                  ),
+                ),
+              ],
             ),
-          ],
+          ),
         ),
       ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: () {
-          if (environment.matrix.any((column) =>
-              column.any((element) => element.preys.length > 2000))) {
-            Dialogs.simpleAlertDialog("Error",
-                "Existen demasiadas presas en uno o más entornos", context);
-            return;
-          }
-          if (environment.matrix.any((column) =>
-              column.any((element) => element.predators.length > 2000))) {
-            Dialogs.simpleAlertDialog(
-                "Error",
-                "Existen demasiados depredadores en uno o más entornos",
-                context);
-            return;
-          }
-          environment.iteratePlaces();
-          iteration++;
-          setState(() {});
-        },
-        tooltip: 'Increment',
-        child: const Icon(Icons.add),
-      ),
-    );
-  }
-
-  Widget _iconPlaceType() {
-    if (_placeType == 0) {
-      return const Text(
-        "View",
-        style: TextStyle(
-            color: Colors.white, fontWeight: FontWeight.bold, fontSize: 10),
-        textAlign: TextAlign.center,
-      );
-    }
-
-    if (_placeType == 1) {
-      return const Text(
-        "Noise",
-        style: TextStyle(
-            color: Colors.white, fontWeight: FontWeight.bold, fontSize: 10),
-        textAlign: TextAlign.center,
-      );
-    }
-
-    if (_placeType == 2) {
-      return const Text(
-        "Smell",
-        style: TextStyle(
-            color: Colors.white, fontWeight: FontWeight.bold, fontSize: 10),
-        textAlign: TextAlign.center,
-      );
-    }
-
-    return const Text(
-      "All",
-      style: TextStyle(
-          color: Colors.white, fontWeight: FontWeight.bold, fontSize: 10),
-      textAlign: TextAlign.center,
     );
   }
 }
