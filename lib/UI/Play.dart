@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:prey_predator_simulacion/Functions/Dialogs.dart';
 import 'package:prey_predator_simulacion/Models/Environment.dart';
+import 'package:prey_predator_simulacion/Models/Place.dart';
 import 'package:prey_predator_simulacion/UI/PlacceColors.dart';
 import 'package:prey_predator_simulacion/UI/PlaceInfo.dart';
 
@@ -12,7 +13,7 @@ class Play extends StatefulWidget {
 
 class _Play extends State<Play> {
   int _placeType = 0;
-  Environment environment = Environment(tX: 4, tY: 3);
+  Environment environment = Environment();
   late Size s;
   int maxX = 0, maxY = 0, iteration = 0;
 
@@ -57,6 +58,7 @@ class _Play extends State<Play> {
                 if (!await Dialogs.boolAnswerDialog(
                     "Advertencia", "¿Resetear el entorno?", context)) return;
                 environment.matrix = [];
+                Place.iterations.clear();
                 iteration = 0;
                 setState(() {});
               }),
@@ -110,11 +112,11 @@ class _Play extends State<Play> {
           ],
         ),
       ),
-      floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
+      floatingActionButtonLocation: FloatingActionButtonLocation.miniEndDocked,
       floatingActionButton: FloatingActionButton(
         backgroundColor: Colors.purple[50],
         onPressed: () {
-          if (environment.matrix.any((column) =>
+          /*if (environment.matrix.any((column) =>
               column.any((element) => element.preys.length > 2000))) {
             Dialogs.simpleAlertDialog("Error",
                 "Existen demasiadas presas en uno o más entornos", context);
@@ -127,8 +129,16 @@ class _Play extends State<Play> {
                 "Existen demasiados depredadores en uno o más entornos",
                 context);
             return;
-          }
+          }*/
+          //int totalPreys = Prey.living + 0;
+          // int totalPredators = Predator.living + 0;
           environment.iteratePlaces();
+          //int predKills = totalPredators - Predator.living;
+          //int preysKills = totalPreys - Prey.living;
+          //Place.iterations[iteration] = {
+          // "cazadores muertos": predKills,
+          // "presas muertas": preysKills
+          // };
           iteration++;
           setState(() {});
         },

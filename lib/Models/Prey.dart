@@ -1,5 +1,8 @@
 import 'dart:math';
 
+import 'package:prey_predator_simulacion/Models/Environment.dart';
+import 'package:prey_predator_simulacion/Models/UserAdjust.dart';
+
 //Estas variables son globales y creo que estan bien porque de esta manera
 //Podemos manipularlas facilmente
 List<Prey> listaPresas = [];
@@ -8,12 +11,14 @@ int nPresasTemp = 0;
 
 //Clase presa
 class Prey {
-  int odor = Random().nextInt(10) + 1;
-  int camouflage = Random().nextInt(10) + 1;
-  int noise = Random().nextInt(10) + 1;
-  int energy = Random().nextInt(10) + 1;
-  int weight = Random().nextInt(7) + 3;
+  static int living = 0;
+  int odor = 1;
+  int camouflage = 1;
+  int noise = 1;
+  int energy = 1;
+  int weight = 1;
   bool sex;
+
   bool normal =
       true; //Verdadero si ha parido crias en las ultimas 3 iteraciones
   int giveBirth = 0; //iteraciones desde la ultima vez que parió
@@ -21,19 +26,16 @@ class Prey {
   double reproduce = 0;
   int defending = 1;
 
-  void defensa() {
-        defending = Random().nextInt(weight) + 1;
-  }
-
-  Prey({required this.x, required this.y, required this.sex});
-
-  void imprime() {
-    print('odor $odor');
-    print('camouflage $camouflage');
-    print('noise $noise');
-    print('energy $energy');
-    print('weight $weight');
-    print('defending $defending');
+  Prey({required this.x, required this.y, required this.sex}) {
+    PreyAdjust pa = Environment.ua.preyA;
+    energy = Random().nextInt(pa.maxEnergy - (pa.minenergy - 1)) + pa.minenergy;
+    weight = Random().nextInt(pa.maxWeigth - (pa.minWeight - 1)) + pa.minWeight;
+    defending = Random().nextInt(pa.maxDefending - (pa.minDefending - 1)) +
+        pa.minDefending;
+    odor = Random().nextInt(pa.maxOdor - (pa.minOdor - 1)) + pa.minOdor;
+    noise = Random().nextInt(pa.maxNoise - (pa.minNoise - 1)) + pa.minNoise;
+    camouflage = Random().nextInt(pa.maxCamouflaje - (pa.minCamouflage - 1)) +
+        pa.minCamouflage;
   }
 
   //Funcion para reproducir las presas e insertarlas a la lista principal de presas en la simulacion
@@ -41,7 +43,6 @@ class Prey {
     if (energy >= 6) {
       listaPresas.insert(0, Prey(x: x, y: y, sex: Random().nextBool()));
       //Se ajusta su defensa
-      listaPresas[0].defensa();
       nPresasTemp = nPresasTemp + 1;
     }
   }
@@ -53,28 +54,28 @@ class Prey {
 
     List<Prey> newsChilds = [];
     //Aumentamos su capacidad de reproduccion
-    reproduce += 2 / weight;
-
+    reproduce += (3 / weight);
+    giveBirth++;
     //Si esta en estado normal o si tiene mas de 2 iteraciones desde la uútima vez que parió
     if (normal || giveBirth > 2) {
       if (!normal) {
-        //Si está en estado no normal, bajamos la defensa
+        //Si está en estado agresivo, bajamos la defensa
         defending = (defending / 3 * 2).ceil();
+        normal = true;
       }
-      normal = true;
-      giveBirth = 0; //Reseteamos los dias desde que parió
 
       //Si ha alcanzado una capacidad de reproduccion buena, hay al menos un macho en el área
-      if (reproduce >= 3 && hasMalePrey) {
+      if (reproduce >= Environment.ua.preyA.reproduceRatio && hasMalePrey) {
+        giveBirth = 0;
         reproduce = 0;
         normal = false; //Pasamos a modo agresivo pues tendrá crias
         defending = (defending * 1.5).ceil(); //Aumentamos su agresividad un 50%
-        int sons = (8 / weight)
+        int sons = (Environment.ua.preyA.sons / weight)
             .ceil(); //Cantidad de presas qu tendrá de acuerdo a su peso
+
         for (var i = 0; i < sons; i++) {
           //Agregamos hijos a la lista de nuevas crias
           final child = Prey(x: x, y: y, sex: Random().nextBool());
-          child.defensa();
           newsChilds.add(child);
         }
       }
@@ -114,6 +115,4 @@ void mecanismoPrincipal(int maxX, int maxY) {
 void main() {
   //mecanismoPrincipal(20, 30);
   Prey a = Prey(x: 1, y: 1, sex: true);
-  a.defensa();
-  a.imprime();
 }

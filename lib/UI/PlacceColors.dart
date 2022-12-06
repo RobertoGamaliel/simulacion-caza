@@ -100,6 +100,12 @@ class PlaceColors {
       crossAxisAlignment: CrossAxisAlignment.center,
       children: [
         Text(
+          "Máx. iteración: ${place.maxIteration}",
+          style: GoogleFonts.montserrat(
+              color: Colors.black, fontWeight: FontWeight.bold, fontSize: 7),
+          textAlign: TextAlign.center,
+        ),
+        Text(
           "Presas: ${place.preys.length}",
           style: GoogleFonts.montserrat(
               color: Colors.black, fontWeight: FontWeight.bold, fontSize: 11),

@@ -1,19 +1,25 @@
 import 'dart:math';
 
 import 'package:prey_predator_simulacion/Functions/GenerateToken.dart';
+import 'package:prey_predator_simulacion/Models/Environment.dart';
 import 'package:prey_predator_simulacion/Models/Predator.dart';
 import 'package:prey_predator_simulacion/Models/Prey.dart';
 
 class Place {
   Place({required this.odor, required this.view, required this.noise});
-
+  static Map iterations = {};
   int odor;
   int view;
   int noise;
   List<Prey> preys = [];
   List<Predator> predators = [];
+  int maxIteration = 0;
 
   void iteratePlace() {
+    if (preys.length > 2500 ||
+        predators.length > 2500 ||
+        predators.isEmpty && preys.isEmpty) return;
+    maxIteration++;
     iteratePreys();
     iteratePredators();
   }
@@ -62,7 +68,6 @@ class Place {
 
     //Ya recorrida la lista de prresas, la modificamos agregando las nuevas crias
     for (var newchild in newChilds) {
-      newchild.defensa();
       preys.add(newchild);
     }
   }
@@ -96,8 +101,11 @@ class Place {
   }
 
   void generate(int x, int y) {
-    int totalPreys = Random().nextInt(100) + 1;
-    int totalPredators = Random().nextInt(50) + 1;
+    final ua = Environment.ua;
+    int totalPreys =
+        Random().nextInt(ua.maxPreys - (ua.minPreys - 1)) + ua.minPreys;
+    int totalPredators =
+        Random().nextInt(ua.maxHunters - (ua.minhunters - 1)) + ua.minhunters;
     List<String> species = [
       "León",
       "Gato",
@@ -121,7 +129,6 @@ class Place {
 
     for (var i = 0; i < totalPreys; i++) {
       preys.add(Prey(x: x, y: y, sex: Random().nextBool()));
-      preys[i].defensa();
     }
   }
 

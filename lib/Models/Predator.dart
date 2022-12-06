@@ -12,7 +12,10 @@ class Predator {
       required this.weight,
       required this.token,
       required this.species,
-      required this.sex});
+      required this.sex}) {
+    living++;
+  }
+  static int living = 0;
   Map<String, dynamic> senses;
   double health;
   double weight;

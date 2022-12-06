@@ -2,6 +2,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:prey_predator_simulacion/Models/Environment.dart';
 import 'package:prey_predator_simulacion/UI/Play.dart';
 
 void main() {
@@ -35,99 +36,630 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
+  bool showIntructions = false;
   @override
   Widget build(BuildContext context) {
     Size s = MediaQuery.of(context).size;
     return Scaffold(
-      body: Center(
-        child: Container(
-          width: s.width * .98,
-          height: s.height * .85,
-          decoration: BoxDecoration(
-              border: Border.all(width: 5.0),
-              borderRadius: BorderRadius.circular(20.0)),
-          child: Padding(
-            // padding: const EdgeInsets.all(16.0),
-            padding: EdgeInsets.fromLTRB(
-                s.width * .05, s.height * .015, s.width * .05, s.height * .015),
-            child: ListView(
-              children: [
-                Text(
-                  "Bienvenido a \n SUPERVIVENCIA DE ESPECIES",
-                  textAlign: TextAlign.center,
-                  style: GoogleFonts.montserrat(
-                      fontSize: 15, fontWeight: FontWeight.w600),
-                ),
-                const Padding(
-                  padding: EdgeInsets.all(15.0),
-                ),
-                Text(
-                  "INSTRUCCIONES",
-                  textAlign: TextAlign.center,
-                  style: GoogleFonts.poppins(
-                      fontSize: 16, fontWeight: FontWeight.w300),
-                ),
-                Text(
-                  "1. La pantalla de inicio cuenta con una barra superior, 12 casillas y 1 botón para el aumentó de iteraciones.",
-                  textAlign: TextAlign.justify,
-                  style: GoogleFonts.poppins(
-                      fontSize: 13, fontWeight: FontWeight.w300),
-                ),
-                Text(
-                  "\n2. En la barra superior encontrarás:\n-Un indicador de iteraciones.\n-Un botón rojo para reiniciar el entorno.\n-Un botón verde que te llevará a los indicadores de los sentidos por casilla del entorno o la opción de ver todos.",
-                  textAlign: TextAlign.justify,
-                  style: GoogleFonts.poppins(
-                      fontSize: 13, fontWeight: FontWeight.w300),
-                ),
-                Text(
-                  "\n3. Cada que oprimas una casilla te llevará a otra pantalla donde conocerás los valores del entorno, número de presas y depredadores junto con las caracteristicas de cada uno.",
-                  textAlign: TextAlign.justify,
-                  style: GoogleFonts.poppins(
-                      fontSize: 13, fontWeight: FontWeight.w300),
-                ),
-                Text(
-                  "\n4. Al iniciar las casillas estrán de color azul la cual significa que estan en el sentido de la vista, para cambiarlo solo oprime el boton verde, como anteriormente se mencionó.",
-                  textAlign: TextAlign.justify,
-                  style: GoogleFonts.poppins(
-                      fontSize: 13, fontWeight: FontWeight.w300),
-                ),
-                Text(
-                  "\n5. En la parte inferior de la pantalla encontrarás el botón que aumentará las iteraciones.",
-                  textAlign: TextAlign.justify,
-                  style: GoogleFonts.poppins(
-                      fontSize: 13, fontWeight: FontWeight.w300),
-                ),
-                Text(
-                  "\n6. Ahora solo oprime COMENZAR!",
-                  textAlign: TextAlign.justify,
-                  style: GoogleFonts.poppins(
-                      fontSize: 13, fontWeight: FontWeight.w300),
-                ),
-                Container(
-                  height: s.height * 0.050,
-                  margin: const EdgeInsets.fromLTRB(60, 15, 60, 10),
-                  child: FlatButton(
-                    onPressed: () {
-                      Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (BuildContext context) => Play()));
-                    },
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(50),
-                    ),
-                    color: Colors.purple[50],
-                    child: Text(
-                      'Comenzar',
-                      style: GoogleFonts.poppins(
-                          color: Colors.purple,
-                          fontSize: 15,
-                          fontWeight: FontWeight.w200),
-                    ),
+      backgroundColor: Colors.white,
+      body: Stack(
+        children: [userAdjust(s), if (showIntructions) instructions(s)],
+      ),
+    );
+  }
+
+  Widget userAdjust(Size s) {
+    return Container(
+      width: s.width,
+      height: s.height,
+      child: ListView(
+        children: [
+          if (!showIntructions)
+            Center(
+                child: ElevatedButton(
+                    style: ElevatedButton.styleFrom(primary: Colors.black),
+                    onPressed: () => setState(() {
+                          showIntructions = !showIntructions;
+                        }),
+                    child: const Text("Instrucciones"))),
+          const Text(
+            "AJUSTES DEL ENTORNO",
+            style: TextStyle(
+                color: Color.fromARGB(255, 110, 4, 4),
+                fontWeight: FontWeight.bold,
+                fontSize: 20),
+            textAlign: TextAlign.center,
+          ),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            mainAxisSize: MainAxisSize.max,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              lessButton(() => setState(() {
+                    if (Environment.ua.xPlace > 1) {
+                      Environment.ua.xPlace--;
+                    }
+                  })),
+              indicator(title: "Ancho", counter: Environment.ua.xPlace),
+              plusButton(() => setState(() {
+                    if (Environment.ua.xPlace < 3) {
+                      Environment.ua.xPlace++;
+                    }
+                  }))
+            ],
+          ),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            mainAxisSize: MainAxisSize.max,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              lessButton(() => setState(() {
+                    if (Environment.ua.yplaces > 1) {
+                      Environment.ua.yplaces--;
+                    }
+                  })),
+              indicator(title: "Alto", counter: Environment.ua.yplaces),
+              plusButton(() => setState(() {
+                    if (Environment.ua.yplaces < 6) {
+                      Environment.ua.yplaces++;
+                    }
+                  }))
+            ],
+          ),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            mainAxisSize: MainAxisSize.max,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              lessButton(() => setState(() {
+                    if (Environment.ua.maxHunters >
+                        (Environment.ua.minhunters + 10)) {
+                      Environment.ua.maxHunters -= 10;
+                    }
+                  })),
+              indicator(
+                  title: "Max depredadores",
+                  counter: Environment.ua.maxHunters),
+              plusButton(() => setState(() {
+                    if (Environment.ua.maxHunters < 300) {
+                      Environment.ua.maxHunters += 10;
+                    }
+                  }))
+            ],
+          ),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            mainAxisSize: MainAxisSize.max,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              lessButton(() => setState(() {
+                    if (Environment.ua.minhunters > 10) {
+                      Environment.ua.minhunters -= 10;
+                    }
+                  })),
+              indicator(
+                  title: "Min depredadores",
+                  counter: Environment.ua.minhunters),
+              plusButton(() => setState(() {
+                    if (Environment.ua.minhunters <
+                        Environment.ua.maxHunters - 10) {
+                      Environment.ua.minhunters += 10;
+                    }
+                  }))
+            ],
+          ),
+          const Text(
+            "\n\nAJUSTES DE PRESAS",
+            style: TextStyle(
+                color: Color.fromARGB(255, 110, 4, 4),
+                fontWeight: FontWeight.bold,
+                fontSize: 20),
+            textAlign: TextAlign.center,
+          ),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            mainAxisSize: MainAxisSize.max,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              lessButton(() => setState(() {
+                    if (Environment.ua.maxPreys >
+                        (Environment.ua.minPreys + 10)) {
+                      Environment.ua.maxPreys -= 10;
+                    }
+                  })),
+              indicator(
+                  title: "Max presas p/casilla",
+                  counter: Environment.ua.maxPreys),
+              plusButton(() => setState(() {
+                    if (Environment.ua.maxPreys < 300) {
+                      Environment.ua.maxPreys += 10;
+                    }
+                  }))
+            ],
+          ),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            mainAxisSize: MainAxisSize.max,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              lessButton(() => setState(() {
+                    if (Environment.ua.minPreys > 10) {
+                      Environment.ua.minPreys -= 10;
+                    }
+                  })),
+              indicator(
+                  title: "Min presas p/casilla",
+                  counter: Environment.ua.minPreys),
+              plusButton(() => setState(() {
+                    if (Environment.ua.minPreys <
+                        Environment.ua.maxPreys - 10) {
+                      Environment.ua.minPreys += 10;
+                    }
+                  }))
+            ],
+          ),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            mainAxisSize: MainAxisSize.max,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              lessButton(() => setState(() {
+                    if (Environment.ua.preyA.maxEnergy > 1 &&
+                        Environment.ua.preyA.maxEnergy >
+                            Environment.ua.preyA.minenergy + 1) {
+                      Environment.ua.preyA.maxEnergy--;
+                    }
+                  })),
+              indicator(
+                  title: "Energía máxima",
+                  counter: Environment.ua.preyA.maxEnergy),
+              plusButton(() => setState(() {
+                    if (Environment.ua.preyA.maxEnergy < 10) {
+                      Environment.ua.preyA.maxEnergy++;
+                    }
+                  }))
+            ],
+          ),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            mainAxisSize: MainAxisSize.max,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              lessButton(() => setState(() {
+                    if (Environment.ua.preyA.minenergy > 1) {
+                      Environment.ua.preyA.minenergy--;
+                    }
+                  })),
+              indicator(
+                  title: "Energía mínima",
+                  counter: Environment.ua.preyA.minenergy),
+              plusButton(() => setState(() {
+                    if (Environment.ua.preyA.minenergy <
+                        Environment.ua.preyA.maxEnergy - 1) {
+                      Environment.ua.preyA.minenergy++;
+                    }
+                  }))
+            ],
+          ),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            mainAxisSize: MainAxisSize.max,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              lessButton(() => setState(() {
+                    if (Environment.ua.preyA.maxDefending >
+                        Environment.ua.preyA.minDefending + 1) {
+                      Environment.ua.preyA.maxDefending--;
+                    }
+                  })),
+              indicator(
+                  title: "Defensa máxima",
+                  counter: Environment.ua.preyA.maxDefending),
+              plusButton(() => setState(() {
+                    if (Environment.ua.preyA.maxDefending < 10) {
+                      Environment.ua.preyA.maxDefending++;
+                    }
+                  }))
+            ],
+          ),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            mainAxisSize: MainAxisSize.max,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              lessButton(() => setState(() {
+                    if (Environment.ua.preyA.minDefending > 1) {
+                      Environment.ua.preyA.minDefending--;
+                    }
+                  })),
+              indicator(
+                  title: "Defensa mínima",
+                  counter: Environment.ua.preyA.minDefending),
+              plusButton(() => setState(() {
+                    if (Environment.ua.preyA.minDefending <
+                        Environment.ua.preyA.maxDefending - 1) {
+                      Environment.ua.preyA.minDefending++;
+                    }
+                  }))
+            ],
+          ),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            mainAxisSize: MainAxisSize.max,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              lessButton(() => setState(() {
+                    if (Environment.ua.preyA.maxWeigth >
+                        Environment.ua.preyA.minWeight + 1) {
+                      Environment.ua.preyA.maxWeigth--;
+                    }
+                  })),
+              indicator(
+                  title: "Peso máximo",
+                  counter: Environment.ua.preyA.maxWeigth),
+              plusButton(() => setState(() {
+                    if (Environment.ua.preyA.maxWeigth < 10) {
+                      Environment.ua.preyA.maxWeigth++;
+                    }
+                  }))
+            ],
+          ),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            mainAxisSize: MainAxisSize.max,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              lessButton(() => setState(() {
+                    if (Environment.ua.preyA.minWeight > 1) {
+                      Environment.ua.preyA.minWeight--;
+                    }
+                  })),
+              indicator(
+                  title: "Peso mínimo",
+                  counter: Environment.ua.preyA.minWeight),
+              plusButton(() => setState(() {
+                    if (Environment.ua.preyA.minWeight <
+                        Environment.ua.preyA.maxWeigth - 1) {
+                      Environment.ua.preyA.minWeight++;
+                    }
+                  }))
+            ],
+          ),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            mainAxisSize: MainAxisSize.max,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              lessButton(() => setState(() {
+                    if (Environment.ua.preyA.maxOdor >
+                        Environment.ua.preyA.minOdor + 1) {
+                      Environment.ua.preyA.maxOdor--;
+                    }
+                  })),
+              indicator(
+                  title: "Aroma máximo", counter: Environment.ua.preyA.maxOdor),
+              plusButton(() => setState(() {
+                    if (Environment.ua.preyA.maxOdor < 10) {
+                      Environment.ua.preyA.maxOdor++;
+                    }
+                  }))
+            ],
+          ),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            mainAxisSize: MainAxisSize.max,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              lessButton(() => setState(() {
+                    if (Environment.ua.preyA.minOdor > 1) {
+                      Environment.ua.preyA.minOdor--;
+                    }
+                  })),
+              indicator(
+                  title: "Aroma mínimo", counter: Environment.ua.preyA.minOdor),
+              plusButton(() => setState(() {
+                    if (Environment.ua.preyA.minOdor <
+                        Environment.ua.preyA.maxOdor - 1) {
+                      Environment.ua.preyA.minOdor++;
+                    }
+                  }))
+            ],
+          ),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            mainAxisSize: MainAxisSize.max,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              lessButton(() => setState(() {
+                    if (Environment.ua.preyA.maxCamouflaje >
+                        Environment.ua.preyA.minCamouflage + 1) {
+                      Environment.ua.preyA.maxCamouflaje--;
+                    }
+                  })),
+              indicator(
+                  title: "Camuflaje máximo",
+                  counter: Environment.ua.preyA.maxCamouflaje),
+              plusButton(() => setState(() {
+                    if (Environment.ua.preyA.maxCamouflaje < 10) {
+                      Environment.ua.preyA.maxCamouflaje++;
+                    }
+                  }))
+            ],
+          ),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            mainAxisSize: MainAxisSize.max,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              lessButton(() => setState(() {
+                    if (Environment.ua.preyA.minCamouflage > 1) {
+                      Environment.ua.preyA.minCamouflage--;
+                    }
+                  })),
+              indicator(
+                  title: "Camuflaje mínimo",
+                  counter: Environment.ua.preyA.minCamouflage),
+              plusButton(() => setState(() {
+                    if (Environment.ua.preyA.minCamouflage <
+                        Environment.ua.preyA.maxCamouflaje - 1) {
+                      Environment.ua.preyA.minCamouflage++;
+                    }
+                  }))
+            ],
+          ),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            mainAxisSize: MainAxisSize.max,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              lessButton(() => setState(() {
+                    if (Environment.ua.preyA.reproduceRatio > 0.5) {
+                      Environment.ua.preyA.reproduceRatio -= 0.5;
+                    }
+                  })),
+              indicator(
+                  title: "Reproduccion ratio",
+                  counter: Environment.ua.preyA.reproduceRatio),
+              plusButton(() => setState(() {
+                    if (Environment.ua.preyA.reproduceRatio < 5) {
+                      Environment.ua.preyA.reproduceRatio += 0.5;
+                    }
+                  }))
+            ],
+          ),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            mainAxisSize: MainAxisSize.max,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              lessButton(() => setState(() {
+                    if (Environment.ua.preyA.sons > 1) {
+                      Environment.ua.preyA.sons++;
+                    }
+                  })),
+              indicator(
+                  title: "Max camada cachorros",
+                  counter: Environment.ua.preyA.sons),
+              plusButton(() => setState(() {
+                    if (Environment.ua.preyA.sons < 20) {
+                      Environment.ua.preyA.sons++;
+                    }
+                  }))
+            ],
+          ),
+          const Text(
+            "\n\nAJUSTES DE DEPREDADORES",
+            style: TextStyle(
+                color: Color.fromARGB(255, 110, 4, 4),
+                fontWeight: FontWeight.bold,
+                fontSize: 20),
+            textAlign: TextAlign.center,
+          ),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            mainAxisSize: MainAxisSize.max,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              lessButton(() => setState(() {
+                    if (Environment.ua.preyA.maxEnergy > 1 &&
+                        Environment.ua.preyA.maxEnergy >
+                            Environment.ua.preyA.minenergy + 1) {
+                      Environment.ua.preyA.maxEnergy--;
+                    }
+                  })),
+              indicator(
+                  title: "Energía máxima",
+                  counter: Environment.ua.preyA.maxEnergy),
+              plusButton(() => setState(() {
+                    if (Environment.ua.preyA.maxEnergy < 10) {
+                      Environment.ua.preyA.maxEnergy++;
+                    }
+                  }))
+            ],
+          ),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            mainAxisSize: MainAxisSize.max,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              lessButton(() => setState(() {
+                    if (Environment.ua.preyA.minenergy > 1) {
+                      Environment.ua.preyA.minenergy--;
+                    }
+                  })),
+              indicator(
+                  title: "Energía mínima",
+                  counter: Environment.ua.preyA.minenergy),
+              plusButton(() => setState(() {
+                    if (Environment.ua.preyA.minenergy <
+                        Environment.ua.preyA.maxEnergy - 1) {
+                      Environment.ua.preyA.minenergy++;
+                    }
+                  }))
+            ],
+          ),
+          Center(
+              child: ElevatedButton(
+                  style: ElevatedButton.styleFrom(primary: Colors.black),
+                  onPressed: () => Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (BuildContext context) => Play())),
+                  child: const Text("Iniciar simulación")))
+        ],
+      ),
+    );
+  }
+
+  Widget indicator({required String title, required var counter}) {
+    return Padding(
+      padding: const EdgeInsets.all(15),
+      child: Text.rich(
+        TextSpan(
+            text: title,
+            style: TextStyle(
+                color: Colors.blue[800],
+                fontWeight: FontWeight.w400,
+                fontSize: 16),
+            children: [
+              TextSpan(
+                text: "\n$counter",
+                style: const TextStyle(
+                    color: Colors.black,
+                    fontWeight: FontWeight.bold,
+                    fontSize: 20),
+              )
+            ]),
+        textAlign: TextAlign.center,
+      ),
+    );
+  }
+
+  ButtonStyle styleButton() {
+    return ElevatedButton.styleFrom(
+        primary: Colors.amber, shape: const StadiumBorder());
+  }
+
+  Text lessText() {
+    return const Text(
+      "-",
+      style: TextStyle(
+          color: Colors.black, fontWeight: FontWeight.bold, fontSize: 30),
+      textAlign: TextAlign.center,
+    );
+  }
+
+  Text plusText() {
+    return const Text(
+      "+",
+      style: TextStyle(
+          color: Colors.black, fontWeight: FontWeight.bold, fontSize: 18),
+      textAlign: TextAlign.center,
+    );
+  }
+
+  Widget plusButton(Function f) {
+    return ElevatedButton(
+        style: styleButton(), onPressed: () => f(), child: plusText());
+  }
+
+  Widget lessButton(Function f) {
+    return ElevatedButton(
+        style: styleButton(), onPressed: () => f(), child: lessText());
+  }
+
+  Widget instructions(Size s) {
+    return Center(
+      child: Container(
+        width: s.width * .98,
+        height: s.height * .85,
+        decoration: BoxDecoration(
+            color: Colors.white.withOpacity(.95),
+            border: Border.all(width: 5.0),
+            borderRadius: BorderRadius.circular(20.0)),
+        child: Padding(
+          // padding: const EdgeInsets.all(16.0),
+          padding: EdgeInsets.fromLTRB(
+              s.width * .05, s.height * .015, s.width * .05, s.height * .015),
+          child: ListView(
+            children: [
+              Text(
+                "Bienvenido a \n SUPERVIVENCIA DE ESPECIES",
+                textAlign: TextAlign.center,
+                style: GoogleFonts.montserrat(
+                    fontSize: 15, fontWeight: FontWeight.w600),
+              ),
+              const Padding(
+                padding: EdgeInsets.all(15.0),
+              ),
+              Text(
+                "INSTRUCCIONES",
+                textAlign: TextAlign.center,
+                style: GoogleFonts.poppins(
+                    fontSize: 16, fontWeight: FontWeight.w300),
+              ),
+              Text(
+                "1. La pantalla de inicio cuenta con una barra superior, 12 casillas y 1 botón para el aumentó de iteraciones.",
+                textAlign: TextAlign.justify,
+                style: GoogleFonts.poppins(
+                    fontSize: 13, fontWeight: FontWeight.w300),
+              ),
+              Text(
+                "\n2. En la barra superior encontrarás:\n-Un indicador de iteraciones.\n-Un botón rojo para reiniciar el entorno.\n-Un botón verde que te llevará a los indicadores de los sentidos por casilla del entorno o la opción de ver todos.",
+                textAlign: TextAlign.justify,
+                style: GoogleFonts.poppins(
+                    fontSize: 13, fontWeight: FontWeight.w300),
+              ),
+              Text(
+                "\n3. Cada que oprimas una casilla te llevará a otra pantalla donde conocerás los valores del entorno, número de presas y depredadores junto con las caracteristicas de cada uno.",
+                textAlign: TextAlign.justify,
+                style: GoogleFonts.poppins(
+                    fontSize: 13, fontWeight: FontWeight.w300),
+              ),
+              Text(
+                "\n4. Al iniciar las casillas estrán de color azul la cual significa que estan en el sentido de la vista, para cambiarlo solo oprime el boton verde, como anteriormente se mencionó.",
+                textAlign: TextAlign.justify,
+                style: GoogleFonts.poppins(
+                    fontSize: 13, fontWeight: FontWeight.w300),
+              ),
+              Text(
+                "\n5. En la parte inferior de la pantalla encontrarás el botón que aumentará las iteraciones.",
+                textAlign: TextAlign.justify,
+                style: GoogleFonts.poppins(
+                    fontSize: 13, fontWeight: FontWeight.w300),
+              ),
+              Text(
+                "\n6. Ahora solo oprime COMENZAR!",
+                textAlign: TextAlign.justify,
+                style: GoogleFonts.poppins(
+                    fontSize: 13, fontWeight: FontWeight.w300),
+              ),
+              Container(
+                height: s.height * 0.050,
+                margin: const EdgeInsets.fromLTRB(60, 15, 60, 10),
+                child: FlatButton(
+                  onPressed: () {
+                    showIntructions = !showIntructions;
+                    setState(() {});
+                    /*Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (BuildContext context) => Play()));*/
+                  },
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(50),
+                  ),
+                  color: Colors.purple[50],
+                  child: Text(
+                    'Aceptar',
+                    style: GoogleFonts.poppins(
+                        color: Colors.purple,
+                        fontSize: 15,
+                        fontWeight: FontWeight.w200),
                   ),
                 ),
-              ],
-            ),
+              ),
+            ],
           ),
         ),
       ),

@@ -1,19 +1,17 @@
 import 'dart:math';
 
 import 'package:prey_predator_simulacion/Models/Place.dart';
+import 'package:prey_predator_simulacion/Models/UserAdjust.dart';
 
 class Environment {
-  Environment({
-    required this.tX,
-    required this.tY,
-  });
-  int tX, tY;
+  Environment();
+  static UserAdjust ua = UserAdjust();
   List<List<Place>> matrix = [];
 
   bool canMove(int x, int y) {
-    if (tX <= x) return false;
+    if (ua.xPlace <= x) return false;
     if (x < 0) return false;
-    if (tY <= y) return false;
+    if (ua.yplaces <= y) return false;
     if (y < 0) return false;
     return true;
   }
@@ -41,9 +39,9 @@ class Environment {
   }
 
   generatePlaces() {
-    for (var x = 0; x < tX; x++) {
+    for (var y = 0; y < ua.yplaces; y++) {
       matrix.add([]);
-      for (var y = 0; y < tY; y++) {
+      for (var x = 0; x < ua.xPlace; x++) {
         matrix.last.add(Place(
             odor: Random().nextInt(15),
             view: Random().nextInt(10),
