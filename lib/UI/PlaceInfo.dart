@@ -3,6 +3,7 @@ import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:prey_predator_simulacion/Models/Place.dart';
 import 'package:prey_predator_simulacion/UI/PlacceColors.dart';
+import 'package:prey_predator_simulacion/UI/preysDescription.dart';
 
 class PlaceInfo extends StatelessWidget {
   PlaceInfo({Key? key, required this.place, required this.x, required this.y})
@@ -231,138 +232,16 @@ class PlaceInfo extends StatelessWidget {
                 ),
               ],
             ),
-            Column(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              mainAxisSize: MainAxisSize.max,
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: List.generate(
-                place.preys.length,
-                (index) => Padding(
-                  padding: const EdgeInsets.only(bottom: 5),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    mainAxisSize: MainAxisSize.max,
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    children: [
-                      Container(
-                        width: s.width / 10,
-                        alignment: Alignment.center,
-                        decoration: BoxDecoration(
-                            color: index % 2 == 0
-                                ? Colors.white
-                                : Colors.grey[200],
-                            border:
-                                Border.all(color: Colors.black, width: 0.5)),
-                        child: Text("${place.preys[index].energy}"),
-                      ),
-                      Container(
-                        width: s.width / 10,
-                        alignment: Alignment.center,
-                        decoration: BoxDecoration(
-                            color: index % 2 == 0
-                                ? Colors.white
-                                : Colors.grey[200],
-                            border:
-                                Border.all(color: Colors.black, width: 0.5)),
-                        child: Text("${place.preys[index].weight}"),
-                      ),
-                      Container(
-                        width: s.width / 10,
-                        alignment: Alignment.center,
-                        decoration: BoxDecoration(
-                            color: index % 2 == 0
-                                ? Colors.white
-                                : Colors.grey[200],
-                            border:
-                                Border.all(color: Colors.black, width: 0.5)),
-                        child: Text(
-                            place.preys[index].reproduce.toStringAsFixed(2)),
-                      ),
-                      Container(
-                        width: s.width / 10,
-                        alignment: Alignment.center,
-                        decoration: BoxDecoration(
-                            color: place.preys[index].sex
-                                ? Colors.pink[50]
-                                : Colors.greenAccent[300],
-                            border:
-                                Border.all(color: Colors.black, width: 0.5)),
-                        child: Text(
-                          place.preys[index].sex ? 'Hembra' : 'Macho',
-                          style: const TextStyle(
-                              color: Colors.black,
-                              fontWeight: FontWeight.w400,
-                              fontSize: 8),
-                          textAlign: TextAlign.center,
-                        ),
-                      ),
-                      Container(
-                        width: s.width / 10,
-                        alignment: Alignment.center,
-                        decoration: BoxDecoration(
-                            color: index % 2 == 0
-                                ? Colors.white
-                                : Colors.grey[200],
-                            border:
-                                Border.all(color: Colors.black, width: 0.5)),
-                        child: Text("${place.preys[index].camouflage}"),
-                      ),
-                      Container(
-                        width: s.width / 10,
-                        alignment: Alignment.center,
-                        decoration: BoxDecoration(
-                            color: index % 2 == 0
-                                ? Colors.white
-                                : Colors.grey[200],
-                            border:
-                                Border.all(color: Colors.black, width: 0.5)),
-                        child: Text("${place.preys[index].noise}"),
-                      ),
-                      Container(
-                        width: s.width / 10,
-                        alignment: Alignment.center,
-                        decoration: BoxDecoration(
-                            color: index % 2 == 0
-                                ? Colors.white
-                                : Colors.grey[200],
-                            border:
-                                Border.all(color: Colors.black, width: 0.5)),
-                        child: Text("${place.preys[index].odor}"),
-                      ),
-                      Container(
-                        width: s.width / 10,
-                        alignment: Alignment.center,
-                        decoration: BoxDecoration(
-                            color: place.preys[index].sex
-                                ? const Color.fromRGBO(255, 108, 108, 1)
-                                : const Color.fromARGB(255, 0, 216, 112),
-                            border:
-                                Border.all(color: Colors.black, width: 0.5)),
-                        child: Text(
-                          place.preys[index].normal ? 'Normal' : 'Defensa+',
-                          style: const TextStyle(
-                              color: Colors.black,
-                              fontWeight: FontWeight.w400,
-                              fontSize: 8),
-                          textAlign: TextAlign.center,
-                        ),
-                      ),
-                      Container(
-                        width: s.width / 10,
-                        alignment: Alignment.center,
-                        decoration: BoxDecoration(
-                            color: index % 2 == 0
-                                ? Colors.white
-                                : Colors.grey[200],
-                            border:
-                                Border.all(color: Colors.black, width: 0.5)),
-                        child: Text("${place.preys[index].giveBirth}"),
-                      ),
-                    ],
-                  ),
-                ),
-              ),
-            ),
+            Center(
+                child: ElevatedButton(
+                    onPressed: () {
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (BuildContext context) =>
+                                  preysDecription(preys: place.preys)));
+                    },
+                    child: const Text("Detalles de pesas")))
           ],
         ),
       ),
