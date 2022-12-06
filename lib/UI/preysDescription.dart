@@ -34,7 +34,7 @@ class preysDecription extends StatelessWidget {
                     child: const RotatedBox(
                         quarterTurns: 1,
                         child: Text(
-                          " Energia ",
+                          " Energía ",
                           textDirection: TextDirection.rtl,
                           style: TextStyle(
                               color: Colors.black,

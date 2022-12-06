@@ -33,7 +33,7 @@ class _Play extends State<Play> {
             padding: EdgeInsets.only(right: 10),
             child: Center(
                 child: Text(
-              "Iteration: $iteration",
+              "Iteración: $iteration",
               style: GoogleFonts.poppins(
                   color: Colors.white,
                   fontWeight: FontWeight.w400,
@@ -141,7 +141,7 @@ class _Play extends State<Play> {
   Widget _iconPlaceType() {
     if (_placeType == 0) {
       return Text(
-        "View",
+        "Vista",
         style: GoogleFonts.poppins(
             color: Colors.white, fontWeight: FontWeight.w400, fontSize: 10),
         textAlign: TextAlign.center,
@@ -150,7 +150,7 @@ class _Play extends State<Play> {
 
     if (_placeType == 1) {
       return Text(
-        "Noise",
+        "Ruido",
         style: GoogleFonts.poppins(
             color: Colors.white, fontWeight: FontWeight.w400, fontSize: 10),
         textAlign: TextAlign.center,
@@ -159,7 +159,7 @@ class _Play extends State<Play> {
 
     if (_placeType == 2) {
       return Text(
-        "Smell",
+        "Olfato",
         style: GoogleFonts.poppins(
             color: Colors.white, fontWeight: FontWeight.w400, fontSize: 10),
         textAlign: TextAlign.center,
@@ -167,7 +167,7 @@ class _Play extends State<Play> {
     }
 
     return Text(
-      "All",
+      "Todo",
       style: GoogleFonts.poppins(
           color: Colors.white, fontWeight: FontWeight.bold, fontSize: 10),
       textAlign: TextAlign.center,

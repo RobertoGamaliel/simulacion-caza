@@ -100,37 +100,37 @@ class PlaceColors {
       crossAxisAlignment: CrossAxisAlignment.center,
       children: [
         Text(
-          "Preys: ${place.preys.length}",
+          "Presas: ${place.preys.length}",
           style: GoogleFonts.montserrat(
               color: Colors.black, fontWeight: FontWeight.bold, fontSize: 12),
           textAlign: TextAlign.center,
         ),
         Text(
-          "female: ${place.femalePrey()}",
+          "Hembras: ${place.femalePrey()}",
           style: GoogleFonts.poppins(
               color: Colors.black, fontWeight: FontWeight.w400, fontSize: 10),
           textAlign: TextAlign.center,
         ),
         Text(
-          "male: ${place.preys.length - place.femalePrey()}",
+          "Machos: ${place.preys.length - place.femalePrey()}",
           style: GoogleFonts.poppins(
               color: Colors.black, fontWeight: FontWeight.w400, fontSize: 10),
           textAlign: TextAlign.center,
         ),
         Text(
-          "\nPredts: ${place.predators.length}",
+          "\nDepredadores: ${place.predators.length}",
           style: GoogleFonts.montserrat(
               color: Colors.black, fontWeight: FontWeight.bold, fontSize: 12),
           textAlign: TextAlign.center,
         ),
         Text(
-          "female: ${place.femlePredtors()}",
+          "Hembras: ${place.femlePredtors()}",
           style: GoogleFonts.poppins(
               color: Colors.black, fontWeight: FontWeight.w400, fontSize: 10),
           textAlign: TextAlign.center,
         ),
         Text(
-          "male: ${place.predators.length - place.femlePredtors()}",
+          "Machos: ${place.predators.length - place.femlePredtors()}",
           style: GoogleFonts.poppins(
               color: Colors.black, fontWeight: FontWeight.w400, fontSize: 10),
           textAlign: TextAlign.center,
