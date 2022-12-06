@@ -22,7 +22,7 @@ class Prey {
   int defending = 1;
 
   void defensa() {
-    defending = Random().nextInt(weight) - 2;
+        defending = Random().nextInt(weight) + 1;
   }
 
   Prey({required this.x, required this.y, required this.sex});
