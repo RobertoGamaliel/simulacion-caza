@@ -14,13 +14,17 @@ class Predator {
       "Chupacabras"
     ];
     final pa = Environment.ua.hunterA;
-    smell = 1;
-    view = 1;
-    hearing = 1;
-    health = 1;
-    weight = 1;
+    smell = Random().nextInt(pa.maxSmell - (pa.minSmell - 1)) + pa.minSmell;
+    view = Random().nextInt(pa.maxView - (pa.minView - 1)) + pa.minView;
+    hearing =
+        Random().nextInt(pa.maxHearing - (pa.minHearing - 1)) + pa.minHearing;
+    health = Random().nextInt((pa.maxHealth - (pa.minHealth - 1)).round()) +
+        pa.minHealth;
+    weight = Random().nextInt((pa.maxWeigth - (pa.minWeigth - 1)).round()) +
+        pa.minWeigth;
     species = speciess[Random().nextInt(6)];
-    sex = false;
+    sex = Random().nextBool();
+    token = GenerateToken.GenToken();
   }
   static int living = 0;
   Map<String, dynamic> senses;

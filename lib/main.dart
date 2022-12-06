@@ -468,7 +468,7 @@ class _MyHomePageState extends State<MyHomePage> {
                     }
                   })),
               indicator(
-                  title: "Energía máxima",
+                  title: "Salud máxima",
                   counter: Environment.ua.hunterA.maxHealth.round()),
               plusButton(() => setState(() {
                     if (Environment.ua.hunterA.maxHealth < 10) {
@@ -488,7 +488,7 @@ class _MyHomePageState extends State<MyHomePage> {
                     }
                   })),
               indicator(
-                  title: "Energía mínima",
+                  title: "Salud mínima",
                   counter: Environment.ua.hunterA.minHealth.round()),
               plusButton(() => setState(() {
                     if (Environment.ua.hunterA.minHealth <
@@ -597,7 +597,7 @@ class _MyHomePageState extends State<MyHomePage> {
                     }
                   })),
               indicator(
-                  title: "Sensibildad auditiva máxima",
+                  title: "Audición máxima",
                   counter: Environment.ua.hunterA.maxHearing),
               plusButton(() => setState(() {
                     if (Environment.ua.hunterA.maxHearing < 10) {
@@ -617,7 +617,7 @@ class _MyHomePageState extends State<MyHomePage> {
                     }
                   })),
               indicator(
-                  title: "Sensibilidad auditiva mínima",
+                  title: "Audición mínima",
                   counter: Environment.ua.hunterA.minHearing),
               plusButton(() => setState(() {
                     if (Environment.ua.hunterA.minHearing <
