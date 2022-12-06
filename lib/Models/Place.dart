@@ -115,16 +115,7 @@ class Place {
       "Chupacabras"
     ];
     for (var i = 0; i < totalPredators; i++) {
-      predators.add(Predator(
-          senses: makeSenses(),
-          smell: Random().nextInt(9) + 1,
-          view: Random().nextInt(9) + 1,
-          hearing: Random().nextInt(9) + 1,
-          health: Random().nextInt(9) + 1,
-          weight: (Random().nextInt(9) + 2) / 2,
-          token: GenerateToken.GenToken(),
-          species: species[Random().nextInt(6)],
-          sex: i < totalPredators / 2 ? true : false)); //Random().nextBool()));
+      predators.add(Predator(senses: makeSenses())); //Random().nextBool()));
     }
 
     for (var i = 0; i < totalPreys; i++) {

@@ -1,38 +1,47 @@
 import 'package:prey_predator_simulacion/Functions/GenerateToken.dart';
+import 'package:prey_predator_simulacion/Models/Environment.dart';
 import 'package:prey_predator_simulacion/Models/Prey.dart';
 import 'dart:math';
 
 class Predator {
-  Predator(
-      {required this.senses,
-      required this.smell,
-      required this.view,
-      required this.hearing,
-      required this.health,
-      required this.weight,
-      required this.token,
-      required this.species,
-      required this.sex}) {
-    living++;
+  Predator({required this.senses}) {
+    List<String> speciess = [
+      "León",
+      "Gato",
+      "Lobo",
+      "Aguila",
+      "Bacalaho",
+      "Chupacabras"
+    ];
+    final pa = Environment.ua.hunterA;
+    smell = 1;
+    view = 1;
+    hearing = 1;
+    health = 1;
+    weight = 1;
+    species = speciess[Random().nextInt(6)];
+    sex = false;
   }
   static int living = 0;
   Map<String, dynamic> senses;
-  double health;
-  double weight;
+  double health = 0;
+  double weight = 0;
   double reproduce = 0;
-  int smell;
-  int view;
-  int hearing;
-  String species;
-  String token;
-  bool sex; // true = hembra, false = macho
+  int smell = 0;
+  int view = 0;
+  int hearing = 0;
+  String species = "";
+  String token = "";
+  bool sex = false; // true = hembra, false = macho
 
   List<dynamic> hunt(List<Prey> preys, Map<String, int> placeValues,
       List<Predator> predators) {
     List<Prey> preysAlives = []; //Presas que no son cadazas por el depredador.
     List<Prey> preysKills = []; // presas asesinadas por el depredador
 
-    health -= weight * .25; //Perdida (-0.25%) de energia por el paso del tiempo
+    health -= weight *
+        Environment.ua.hunterA
+            .energyIteration; //Perdida (-0.25%) de energia por el paso del tiempo
 
     if (health < weight * 1.1) {
       //Si se tiene valores muy altos de salud no se caza
@@ -76,28 +85,24 @@ class Predator {
 
     if (sex) {
       //Si es hembra le sumamos el valor de reporducción
-      if (reproduce < 3) {
-        reproduce += (1 / weight); //capacidad de reporduccion
+      if (reproduce < Environment.ua.hunterA.reproduceRatio) {
+        reproduce += (Environment.ua.hunterA.reproductionAdd /
+            weight); //capacidad de reporduccion
       }
 
       bool hasMale = predators
           .any((element) => element.species == species && !element.sex);
 
-      if (reproduce >= 3 && hasMale && !(3 / weight).isNaN) {
+      if (reproduce >= Environment.ua.hunterA.reproduceRatio &&
+          hasMale &&
+          !(3 / weight).isNaN) {
         reproduce = 0;
         //Sacamos cuantas crias tendra y en un ciclo for las incluimos
-        int sons = (3 / weight).ceil();
+        int sons = (Environment.ua.hunterA.maxChild / weight).ceil();
         for (var i = 0; i < sons; i++) {
           predators.add(Predator(
-              senses: senses,
-              smell: smell,
-              view: view,
-              token: GenerateToken.GenToken(),
-              hearing: hearing,
-              health: weight * .5, //Solo tendrá la mitad de la vida de la madre
-              weight: weight,
-              species: species,
-              sex: Random().nextInt(2) == 0 ? true : false));
+            senses: senses,
+          ));
         }
       }
     }

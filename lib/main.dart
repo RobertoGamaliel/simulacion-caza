@@ -49,7 +49,7 @@ class _MyHomePageState extends State<MyHomePage> {
   }
 
   Widget userAdjust(Size s) {
-    return Container(
+    return SizedBox(
       width: s.width,
       height: s.height,
       child: ListView(
@@ -102,48 +102,6 @@ class _MyHomePageState extends State<MyHomePage> {
               plusButton(() => setState(() {
                     if (Environment.ua.yplaces < 6) {
                       Environment.ua.yplaces++;
-                    }
-                  }))
-            ],
-          ),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            mainAxisSize: MainAxisSize.max,
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-              lessButton(() => setState(() {
-                    if (Environment.ua.maxHunters >
-                        (Environment.ua.minhunters + 10)) {
-                      Environment.ua.maxHunters -= 10;
-                    }
-                  })),
-              indicator(
-                  title: "Max depredadores",
-                  counter: Environment.ua.maxHunters),
-              plusButton(() => setState(() {
-                    if (Environment.ua.maxHunters < 300) {
-                      Environment.ua.maxHunters += 10;
-                    }
-                  }))
-            ],
-          ),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            mainAxisSize: MainAxisSize.max,
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-              lessButton(() => setState(() {
-                    if (Environment.ua.minhunters > 10) {
-                      Environment.ua.minhunters -= 10;
-                    }
-                  })),
-              indicator(
-                  title: "Min depredadores",
-                  counter: Environment.ua.minhunters),
-              plusButton(() => setState(() {
-                    if (Environment.ua.minhunters <
-                        Environment.ua.maxHunters - 10) {
-                      Environment.ua.minhunters += 10;
                     }
                   }))
             ],
@@ -434,11 +392,11 @@ class _MyHomePageState extends State<MyHomePage> {
             children: [
               lessButton(() => setState(() {
                     if (Environment.ua.preyA.sons > 1) {
-                      Environment.ua.preyA.sons++;
+                      Environment.ua.preyA.sons--;
                     }
                   })),
               indicator(
-                  title: "Max camada cachorros",
+                  title: "Camada cachorros",
                   counter: Environment.ua.preyA.sons),
               plusButton(() => setState(() {
                     if (Environment.ua.preyA.sons < 20) {
@@ -461,18 +419,17 @@ class _MyHomePageState extends State<MyHomePage> {
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               lessButton(() => setState(() {
-                    if (Environment.ua.preyA.maxEnergy > 1 &&
-                        Environment.ua.preyA.maxEnergy >
-                            Environment.ua.preyA.minenergy + 1) {
-                      Environment.ua.preyA.maxEnergy--;
+                    if (Environment.ua.maxHunters >
+                        (Environment.ua.minhunters + 10)) {
+                      Environment.ua.maxHunters -= 10;
                     }
                   })),
               indicator(
-                  title: "Energía máxima",
-                  counter: Environment.ua.preyA.maxEnergy),
+                  title: "Max depredadores p/casilla",
+                  counter: Environment.ua.maxHunters),
               plusButton(() => setState(() {
-                    if (Environment.ua.preyA.maxEnergy < 10) {
-                      Environment.ua.preyA.maxEnergy++;
+                    if (Environment.ua.maxHunters < 300) {
+                      Environment.ua.maxHunters += 10;
                     }
                   }))
             ],
@@ -483,17 +440,271 @@ class _MyHomePageState extends State<MyHomePage> {
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               lessButton(() => setState(() {
-                    if (Environment.ua.preyA.minenergy > 1) {
-                      Environment.ua.preyA.minenergy--;
+                    if (Environment.ua.minhunters > 10) {
+                      Environment.ua.minhunters -= 10;
+                    }
+                  })),
+              indicator(
+                  title: "Min depredadores p/casilla",
+                  counter: Environment.ua.minhunters),
+              plusButton(() => setState(() {
+                    if (Environment.ua.minhunters <
+                        Environment.ua.maxHunters - 10) {
+                      Environment.ua.minhunters += 10;
+                    }
+                  }))
+            ],
+          ),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            mainAxisSize: MainAxisSize.max,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              lessButton(() => setState(() {
+                    if (Environment.ua.hunterA.maxHealth > 1 &&
+                        Environment.ua.hunterA.maxHealth >
+                            Environment.ua.hunterA.minHealth + 1) {
+                      Environment.ua.hunterA.maxHealth--;
+                    }
+                  })),
+              indicator(
+                  title: "Energía máxima",
+                  counter: Environment.ua.hunterA.maxHealth.round()),
+              plusButton(() => setState(() {
+                    if (Environment.ua.hunterA.maxHealth < 10) {
+                      Environment.ua.hunterA.maxHealth++;
+                    }
+                  }))
+            ],
+          ),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            mainAxisSize: MainAxisSize.max,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              lessButton(() => setState(() {
+                    if (Environment.ua.hunterA.minHealth > 1) {
+                      Environment.ua.hunterA.minHealth--;
                     }
                   })),
               indicator(
                   title: "Energía mínima",
-                  counter: Environment.ua.preyA.minenergy),
+                  counter: Environment.ua.hunterA.minHealth.round()),
               plusButton(() => setState(() {
-                    if (Environment.ua.preyA.minenergy <
-                        Environment.ua.preyA.maxEnergy - 1) {
-                      Environment.ua.preyA.minenergy++;
+                    if (Environment.ua.hunterA.minHealth <
+                        Environment.ua.hunterA.maxHealth - 1) {
+                      Environment.ua.hunterA.minHealth++;
+                    }
+                  }))
+            ],
+          ),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            mainAxisSize: MainAxisSize.max,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              lessButton(() => setState(() {
+                    if (Environment.ua.hunterA.maxView > 1 &&
+                        Environment.ua.hunterA.maxView >
+                            Environment.ua.hunterA.minView + 1) {
+                      Environment.ua.hunterA.maxView--;
+                    }
+                  })),
+              indicator(
+                  title: "Visión máxima",
+                  counter: Environment.ua.hunterA.maxView),
+              plusButton(() => setState(() {
+                    if (Environment.ua.hunterA.maxView < 10) {
+                      Environment.ua.hunterA.maxView++;
+                    }
+                  }))
+            ],
+          ),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            mainAxisSize: MainAxisSize.max,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              lessButton(() => setState(() {
+                    if (Environment.ua.hunterA.minView > 1) {
+                      Environment.ua.hunterA.minView--;
+                    }
+                  })),
+              indicator(
+                  title: "Visión mínima",
+                  counter: Environment.ua.hunterA.minView),
+              plusButton(() => setState(() {
+                    if (Environment.ua.hunterA.minView <
+                        Environment.ua.hunterA.maxView - 1) {
+                      Environment.ua.hunterA.minView++;
+                    }
+                  }))
+            ],
+          ),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            mainAxisSize: MainAxisSize.max,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              lessButton(() => setState(() {
+                    if (Environment.ua.hunterA.maxSmell > 1 &&
+                        Environment.ua.hunterA.maxSmell >
+                            Environment.ua.hunterA.minSmell + 1) {
+                      Environment.ua.hunterA.maxSmell--;
+                    }
+                  })),
+              indicator(
+                  title: "Olfato máximo",
+                  counter: Environment.ua.hunterA.maxSmell),
+              plusButton(() => setState(() {
+                    if (Environment.ua.hunterA.maxSmell < 10) {
+                      Environment.ua.hunterA.maxSmell++;
+                    }
+                  }))
+            ],
+          ),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            mainAxisSize: MainAxisSize.max,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              lessButton(() => setState(() {
+                    if (Environment.ua.hunterA.minSmell > 1) {
+                      Environment.ua.hunterA.minSmell--;
+                    }
+                  })),
+              indicator(
+                  title: "Olfato mínimo",
+                  counter: Environment.ua.hunterA.minSmell),
+              plusButton(() => setState(() {
+                    if (Environment.ua.hunterA.minSmell <
+                        Environment.ua.hunterA.maxSmell - 1) {
+                      Environment.ua.hunterA.minSmell++;
+                    }
+                  }))
+            ],
+          ),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            mainAxisSize: MainAxisSize.max,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              lessButton(() => setState(() {
+                    if (Environment.ua.hunterA.maxHearing > 1 &&
+                        Environment.ua.hunterA.maxHearing >
+                            Environment.ua.hunterA.minHearing + 1) {
+                      Environment.ua.hunterA.maxHearing--;
+                    }
+                  })),
+              indicator(
+                  title: "Sensibildad auditiva máxima",
+                  counter: Environment.ua.hunterA.maxHearing),
+              plusButton(() => setState(() {
+                    if (Environment.ua.hunterA.maxHearing < 10) {
+                      Environment.ua.hunterA.maxHearing++;
+                    }
+                  }))
+            ],
+          ),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            mainAxisSize: MainAxisSize.max,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              lessButton(() => setState(() {
+                    if (Environment.ua.hunterA.minHearing > 1) {
+                      Environment.ua.hunterA.minHearing--;
+                    }
+                  })),
+              indicator(
+                  title: "Sensibilidad auditiva mínima",
+                  counter: Environment.ua.hunterA.minHearing),
+              plusButton(() => setState(() {
+                    if (Environment.ua.hunterA.minHearing <
+                        Environment.ua.hunterA.maxHearing - 1) {
+                      Environment.ua.hunterA.minHearing++;
+                    }
+                  }))
+            ],
+          ),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            mainAxisSize: MainAxisSize.max,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              lessButton(() => setState(() {
+                    if (Environment.ua.hunterA.reproduceRatio > 0.5) {
+                      Environment.ua.hunterA.reproduceRatio -= 0.5;
+                    }
+                  })),
+              indicator(
+                  title: "Ratio de reproducción",
+                  counter: Environment.ua.hunterA.reproduceRatio),
+              plusButton(() => setState(() {
+                    if (Environment.ua.hunterA.reproduceRatio < 10) {
+                      Environment.ua.hunterA.reproduceRatio += 0.5;
+                    }
+                  }))
+            ],
+          ),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            mainAxisSize: MainAxisSize.max,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              lessButton(() => setState(() {
+                    if (Environment.ua.hunterA.energyIteration > 0.05) {
+                      Environment.ua.hunterA.energyIteration -= 0.05;
+                    }
+                  })),
+              indicator(
+                  title: "% Perdida energia",
+                  counter: Environment.ua.hunterA.energyIteration
+                      .toStringAsFixed(2)),
+              plusButton(() => setState(() {
+                    if (Environment.ua.hunterA.energyIteration < 0.95) {
+                      Environment.ua.hunterA.energyIteration += 0.05;
+                    }
+                  }))
+            ],
+          ),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            mainAxisSize: MainAxisSize.max,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              lessButton(() => setState(() {
+                    if (Environment.ua.hunterA.reproductionAdd > 0.2) {
+                      Environment.ua.hunterA.reproductionAdd -= 0.2;
+                    }
+                  })),
+              indicator(
+                  title: "Agregado a reproducción",
+                  counter: Environment.ua.hunterA.reproductionAdd
+                      .toStringAsFixed(2)),
+              plusButton(() => setState(() {
+                    if (Environment.ua.hunterA.reproductionAdd < 5) {
+                      Environment.ua.hunterA.reproductionAdd += 0.2;
+                    }
+                  }))
+            ],
+          ),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            mainAxisSize: MainAxisSize.max,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              lessButton(() => setState(() {
+                    if (Environment.ua.hunterA.maxChild > 1) {
+                      Environment.ua.hunterA.maxChild--;
+                    }
+                  })),
+              indicator(
+                  title: "Máximo de crias",
+                  counter: Environment.ua.hunterA.maxChild),
+              plusButton(() => setState(() {
+                    if (Environment.ua.hunterA.maxChild < 15) {
+                      Environment.ua.hunterA.maxChild++;
                     }
                   }))
             ],

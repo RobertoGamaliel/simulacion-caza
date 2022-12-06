@@ -4,7 +4,7 @@ class UserAdjust {
   HunterAdjust hunterA = HunterAdjust();
   int maxHunters = 40, minhunters = 10, maxPreys = 200, minPreys = 50;
 
-  int yplaces = 3, xPlace = 4;
+  int yplaces = 4, xPlace = 3;
 }
 
 class PreyAdjust {
@@ -27,11 +27,12 @@ class PreyAdjust {
 
 class HunterAdjust {
   HunterAdjust();
-  double minHealth = 0,
-      maxHealth = 0,
+  double minHealth = 1,
+      maxHealth = 10,
       minWeigth = 1,
       maxWeigth = 10,
       reproduceRatio = 3,
+      reproductionAdd = 1,
       energyIteration = 0.25;
 
   int minSmell = 1,
@@ -39,7 +40,8 @@ class HunterAdjust {
       minView = 1,
       maxView = 10,
       minHearing = 1,
-      maxHearing = 10;
+      maxHearing = 10,
+      maxChild = 3;
 }
 
 class PlaceAdjust {
