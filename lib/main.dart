@@ -56,19 +56,28 @@ class _MyHomePageState extends State<MyHomePage> {
         children: [
           if (!showIntructions)
             Center(
-                child: ElevatedButton(
-                    style: ElevatedButton.styleFrom(primary: Colors.black),
-                    onPressed: () => setState(() {
-                          showIntructions = !showIntructions;
-                        }),
-                    child: const Text("Instrucciones"))),
-          const Text(
-            "AJUSTES DEL ENTORNO",
-            style: TextStyle(
-                color: Color.fromARGB(255, 110, 4, 4),
-                fontWeight: FontWeight.bold,
-                fontSize: 20),
-            textAlign: TextAlign.center,
+              child: Padding(
+                  padding: const EdgeInsets.all(18),
+                  child: ElevatedButton(
+                      style: ElevatedButton.styleFrom(primary: Colors.black),
+                      onPressed: () => setState(() {
+                            showIntructions = !showIntructions;
+                          }),
+                      child:
+                          Text("Instrucciones", style: GoogleFonts.poppins()))),
+            ),
+          Container(
+            child: Padding(
+              padding: const EdgeInsets.all(10),
+              child: Text(
+                "AJUSTES DEL ENTORNO",
+                style: GoogleFonts.poppins(
+                    color: Color.fromARGB(255, 110, 4, 4),
+                    fontWeight: FontWeight.bold,
+                    fontSize: 20),
+                textAlign: TextAlign.center,
+              ),
+            ),
           ),
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
@@ -716,7 +725,8 @@ class _MyHomePageState extends State<MyHomePage> {
                       context,
                       MaterialPageRoute(
                           builder: (BuildContext context) => Play())),
-                  child: const Text("Iniciar simulación")))
+                  child:
+                      Text("Iniciar simulación", style: GoogleFonts.poppins())))
         ],
       ),
     );
@@ -728,14 +738,14 @@ class _MyHomePageState extends State<MyHomePage> {
       child: Text.rich(
         TextSpan(
             text: title,
-            style: TextStyle(
+            style: GoogleFonts.poppins(
                 color: Colors.blue[800],
                 fontWeight: FontWeight.w400,
                 fontSize: 16),
             children: [
               TextSpan(
                 text: "\n$counter",
-                style: const TextStyle(
+                style: GoogleFonts.poppins(
                     color: Colors.black,
                     fontWeight: FontWeight.bold,
                     fontSize: 20),
@@ -752,18 +762,18 @@ class _MyHomePageState extends State<MyHomePage> {
   }
 
   Text lessText() {
-    return const Text(
+    return Text(
       "-",
-      style: TextStyle(
+      style: GoogleFonts.poppins(
           color: Colors.black, fontWeight: FontWeight.bold, fontSize: 30),
       textAlign: TextAlign.center,
     );
   }
 
   Text plusText() {
-    return const Text(
+    return Text(
       "+",
-      style: TextStyle(
+      style: GoogleFonts.poppins(
           color: Colors.black, fontWeight: FontWeight.bold, fontSize: 18),
       textAlign: TextAlign.center,
     );
@@ -810,37 +820,43 @@ class _MyHomePageState extends State<MyHomePage> {
                     fontSize: 16, fontWeight: FontWeight.w300),
               ),
               Text(
-                "1. La pantalla de inicio cuenta con una barra superior, 12 casillas y 1 botón para el aumentó de iteraciones.",
+                "1. En esta pantalla puedes definir el tamaño del entorno, ajustar caracteristicas de la presas y depredadores.",
                 textAlign: TextAlign.justify,
                 style: GoogleFonts.poppins(
                     fontSize: 13, fontWeight: FontWeight.w300),
               ),
               Text(
-                "\n2. En la barra superior encontrarás:\n-Un indicador de iteraciones.\n-Un botón rojo para reiniciar el entorno.\n-Un botón verde que te llevará a los indicadores de los sentidos por casilla del entorno o la opción de ver todos.",
+                "\n2. Paso siguiente es oprimir INICIAR SIMULACIÓN.",
                 textAlign: TextAlign.justify,
                 style: GoogleFonts.poppins(
                     fontSize: 13, fontWeight: FontWeight.w300),
               ),
               Text(
-                "\n3. Cada que oprimas una casilla te llevará a otra pantalla donde conocerás los valores del entorno, número de presas y depredadores junto con las caracteristicas de cada uno.",
+                "\n3. Al entrar, podrá observar una barra superior, casillas y un botón para el aumentó de iteraciones en la parte inferior.",
                 textAlign: TextAlign.justify,
                 style: GoogleFonts.poppins(
                     fontSize: 13, fontWeight: FontWeight.w300),
               ),
               Text(
-                "\n4. Al iniciar las casillas estrán de color azul la cual significa que estan en el sentido de la vista, para cambiarlo solo oprime el boton verde, como anteriormente se mencionó.",
+                "\n4. En la barra superior encontrarás:\n-Un indicador de iteraciones.\n-Un botón rojo para reiniciar el entorno.\n-Un botón verde que te llevará a los indicadores de los sentidos por casilla del entorno o la opción de ver todos.",
                 textAlign: TextAlign.justify,
                 style: GoogleFonts.poppins(
                     fontSize: 13, fontWeight: FontWeight.w300),
               ),
               Text(
-                "\n5. En la parte inferior de la pantalla encontrarás el botón que aumentará las iteraciones.",
+                "\n5. Cada que selecciones una casilla te llevará a otra pantalla donde conocerás los valores del entorno, número de presas y depredadores junto con las caracteristicas de cada uno.",
                 textAlign: TextAlign.justify,
                 style: GoogleFonts.poppins(
                     fontSize: 13, fontWeight: FontWeight.w300),
               ),
               Text(
-                "\n6. Ahora solo oprime COMENZAR!",
+                "\n6. Al iniciar las casillas estrán de color azul lo que significa que estan en el sentido de la vista, para cambiarlo solo oprime el boton verde, como anteriormente se mencionó.",
+                textAlign: TextAlign.justify,
+                style: GoogleFonts.poppins(
+                    fontSize: 13, fontWeight: FontWeight.w300),
+              ),
+              Text(
+                "\n7. Entendido esto, solo oprime ACEPTAR",
                 textAlign: TextAlign.justify,
                 style: GoogleFonts.poppins(
                     fontSize: 13, fontWeight: FontWeight.w300),
@@ -852,10 +868,6 @@ class _MyHomePageState extends State<MyHomePage> {
                   onPressed: () {
                     showIntructions = !showIntructions;
                     setState(() {});
-                    /*Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (BuildContext context) => Play()));*/
                   },
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(50),
