@@ -66,17 +66,15 @@ class _MyHomePageState extends State<MyHomePage> {
                       child:
                           Text("Instrucciones", style: GoogleFonts.poppins()))),
             ),
-          Container(
-            child: Padding(
-              padding: const EdgeInsets.all(10),
-              child: Text(
-                "AJUSTES DEL ENTORNO",
-                style: GoogleFonts.poppins(
-                    color: Color.fromARGB(255, 110, 4, 4),
-                    fontWeight: FontWeight.bold,
-                    fontSize: 20),
-                textAlign: TextAlign.center,
-              ),
+          Padding(
+            padding: const EdgeInsets.all(10),
+            child: Text(
+              "AJUSTES DEL ENTORNO",
+              style: GoogleFonts.poppins(
+                  color: Color.fromARGB(255, 110, 4, 4),
+                  fontWeight: FontWeight.bold,
+                  fontSize: 20),
+              textAlign: TextAlign.center,
             ),
           ),
           Row(
@@ -111,6 +109,25 @@ class _MyHomePageState extends State<MyHomePage> {
               plusButton(() => setState(() {
                     if (Environment.ua.yplaces < 6) {
                       Environment.ua.yplaces++;
+                    }
+                  }))
+            ],
+          ),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            mainAxisSize: MainAxisSize.max,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              lessButton(() => setState(() {
+                    if (Environment.ua.iterations > 50) {
+                      Environment.ua.iterations -= 50;
+                    }
+                  })),
+              indicator(
+                  title: "iteraciones", counter: Environment.ua.iterations),
+              plusButton(() => setState(() {
+                    if (Environment.ua.iterations < 5000) {
+                      Environment.ua.iterations += 50;
                     }
                   }))
             ],

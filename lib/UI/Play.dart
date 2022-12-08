@@ -16,6 +16,7 @@ class _Play extends State<Play> {
   Environment environment = Environment();
   late Size s;
   int maxX = 0, maxY = 0, iteration = 0;
+  bool play = false;
 
   @override
   Widget build(BuildContext context) {
@@ -30,6 +31,22 @@ class _Play extends State<Play> {
       appBar: AppBar(
         backgroundColor: Colors.black,
         actions: [
+          FloatingActionButton(
+              mini: true,
+              heroTag: "reset",
+              backgroundColor: play ? Colors.yellow : Colors.black,
+              child: Icon(play ? Icons.pause_circle : Icons.play_circle),
+              onPressed: () async {
+                if (Environment.ua.iterations <= 0) return;
+                if (!await Dialogs.boolAnswerDialog(
+                    "Advertencia",
+                    "¿realizar ${Environment.ua.iterations} iteraciones?",
+                    context)) return;
+                for (var i = 0; i < Environment.ua.iterations; i++) {
+                  environment.iteratePlaces();
+                }
+                setState(() {});
+              }),
           Padding(
             padding: EdgeInsets.only(right: 10),
             child: Center(

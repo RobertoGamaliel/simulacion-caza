@@ -4,7 +4,7 @@ class UserAdjust {
   HunterAdjust hunterA = HunterAdjust();
   int maxHunters = 40, minhunters = 10, maxPreys = 200, minPreys = 50;
 
-  int yplaces = 4, xPlace = 3;
+  int yplaces = 4, xPlace = 3, iterations = 50;
 }
 
 class PreyAdjust {
