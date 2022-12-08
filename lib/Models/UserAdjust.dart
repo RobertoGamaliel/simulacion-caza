@@ -22,7 +22,7 @@ class PreyAdjust {
       minDefending = 1,
       maxDefending = 10,
       sons = 8;
-  double reproduceRatio = 3;
+  double reproduceRatio = 3, reproductionADD = 3;
 }
 
 class HunterAdjust {

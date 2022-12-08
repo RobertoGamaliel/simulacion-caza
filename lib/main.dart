@@ -400,6 +400,27 @@ class _MyHomePageState extends State<MyHomePage> {
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               lessButton(() => setState(() {
+                    if (Environment.ua.preyA.reproductionADD > 0.2) {
+                      Environment.ua.preyA.reproductionADD -= 0.2;
+                    }
+                  })),
+              indicator(
+                  title: "Reproducción ++",
+                  counter:
+                      Environment.ua.preyA.reproductionADD.toStringAsFixed(2)),
+              plusButton(() => setState(() {
+                    if (Environment.ua.preyA.reproductionADD < 5) {
+                      Environment.ua.preyA.reproductionADD += 0.2;
+                    }
+                  }))
+            ],
+          ),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            mainAxisSize: MainAxisSize.max,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              lessButton(() => setState(() {
                     if (Environment.ua.preyA.sons > 1) {
                       Environment.ua.preyA.sons--;
                     }
@@ -434,7 +455,7 @@ class _MyHomePageState extends State<MyHomePage> {
                     }
                   })),
               indicator(
-                  title: "Max depredadores p/casilla",
+                  title: "Max depr. p/casilla",
                   counter: Environment.ua.maxHunters),
               plusButton(() => setState(() {
                     if (Environment.ua.maxHunters < 300) {
@@ -454,7 +475,7 @@ class _MyHomePageState extends State<MyHomePage> {
                     }
                   })),
               indicator(
-                  title: "Min depredadores p/casilla",
+                  title: "Min depr. p/casilla",
                   counter: Environment.ua.minhunters),
               plusButton(() => setState(() {
                     if (Environment.ua.minhunters <
@@ -688,7 +709,7 @@ class _MyHomePageState extends State<MyHomePage> {
                     }
                   })),
               indicator(
-                  title: "Agregado a reproducción",
+                  title: "Reproducción ++",
                   counter: Environment.ua.hunterA.reproductionAdd
                       .toStringAsFixed(2)),
               plusButton(() => setState(() {

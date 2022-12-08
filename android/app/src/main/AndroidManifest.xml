@@ -1,7 +1,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.prey_predator_simulacion">
    <application
-        android:label="prey_predator_simulacion"
+        android:label="proyecto final"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher">
         <activity
